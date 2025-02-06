@@ -11,6 +11,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/ava-labs/avalanchego/snow/engine/common"
 	"go.uber.org/zap"
 
 	"github.com/ava-labs/avalanchego/ids"
@@ -86,6 +87,7 @@ type builder struct {
 
 	txExecutorBackend *txexecutor.Backend
 	blkManager        blockexecutor.Manager
+	toEngine          chan<- common.Message
 
 	// resetTimer is used to signal that the block builder timer should update
 	// when it will trigger building of a block.
@@ -143,7 +145,10 @@ func (b *builder) StartBlockTimer() {
 				}
 
 				// Block needs to be issued to advance time.
-				b.Mempool.RequestBuildBlock(true /*=emptyBlockPermitted*/)
+				select {
+				case b.toEngine <- common.PendingTxs:
+				default:
+				}
 
 				// Invariant: ResetBlockTimer is guaranteed to be called after
 				// [durationToSleep] returns a value <= 0. This is because we
@@ -225,7 +230,16 @@ func (b *builder) BuildBlockWithContext(
 ) (snowman.Block, error) {
 	// If there are still transactions in the mempool, then we need to
 	// re-trigger block building.
-	defer b.Mempool.RequestBuildBlock(false /*=emptyBlockPermitted*/)
+	defer func() {
+		if b.Mempool.Len() == 0 {
+			return
+		}
+
+		select {
+		case b.toEngine <- common.PendingTxs:
+		default:
+		}
+	}()
 
 	b.txExecutorBackend.Ctx.Log.Debug("starting to attempt to build a block")
 
