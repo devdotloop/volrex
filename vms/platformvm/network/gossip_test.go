@@ -12,6 +12,7 @@ import (
 
 	"github.com/ava-labs/avalanchego/ids"
 	"github.com/ava-labs/avalanchego/utils/logging"
+	"github.com/ava-labs/avalanchego/vms/components/gas"
 	"github.com/ava-labs/avalanchego/vms/platformvm/txs"
 	"github.com/ava-labs/avalanchego/vms/txs/mempool"
 
@@ -29,7 +30,12 @@ func TestGossipMempoolAddVerificationError(t *testing.T) {
 		TxID: txID,
 	}
 
-	mempool, err := pmempool.New("", prometheus.NewRegistry(), nil)
+	mempool, err := pmempool.New(
+		"",
+		prometheus.NewRegistry(),
+		gas.Dimensions{},
+		nil,
+	)
 	require.NoError(err)
 	txVerifier := testTxVerifier{err: errFoo}
 
@@ -53,7 +59,12 @@ func TestGossipMempoolAddVerificationError(t *testing.T) {
 func TestMempoolDuplicate(t *testing.T) {
 	require := require.New(t)
 
-	testMempool, err := pmempool.New("", prometheus.NewRegistry(), nil)
+	testMempool, err := pmempool.New(
+		"",
+		prometheus.NewRegistry(),
+		gas.Dimensions{},
+		nil,
+	)
 	require.NoError(err)
 	txVerifier := testTxVerifier{}
 
@@ -91,7 +102,12 @@ func TestGossipAddBloomFilter(t *testing.T) {
 	}
 
 	txVerifier := testTxVerifier{}
-	mempool, err := pmempool.New("", prometheus.NewRegistry(), nil)
+	mempool, err := pmempool.New(
+		"",
+		prometheus.NewRegistry(),
+		gas.Dimensions{},
+		nil,
+	)
 	require.NoError(err)
 
 	gossipMempool, err := newGossipMempool(
