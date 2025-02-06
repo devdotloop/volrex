@@ -175,6 +175,7 @@ func newEnvironment(t *testing.T, f upgradetest.Fork) *environment { //nolint:un
 
 	res.Builder = New(
 		res.mempool,
+		nil,
 		&res.backend,
 		res.blkManager,
 	)

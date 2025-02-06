@@ -85,9 +85,9 @@ type Builder interface {
 type builder struct {
 	mempool.Mempool
 
+	toEngine          chan<- common.Message
 	txExecutorBackend *txexecutor.Backend
 	blkManager        blockexecutor.Manager
-	toEngine          chan<- common.Message
 
 	// resetTimer is used to signal that the block builder timer should update
 	// when it will trigger building of a block.
@@ -98,11 +98,13 @@ type builder struct {
 
 func New(
 	mempool mempool.Mempool,
+	toEngine chan<- common.Message,
 	txExecutorBackend *txexecutor.Backend,
 	blkManager blockexecutor.Manager,
 ) Builder {
 	return &builder{
 		Mempool:           mempool,
+		toEngine:          toEngine,
 		txExecutorBackend: txExecutorBackend,
 		blkManager:        blkManager,
 		resetTimer:        make(chan struct{}, 1),
