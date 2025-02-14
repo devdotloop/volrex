@@ -7,6 +7,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/stretchr/testify/require"
+
 	"github.com/ava-labs/avalanchego/ids"
 	"github.com/ava-labs/avalanchego/vms/components/avax"
 	"github.com/ava-labs/avalanchego/vms/components/gas"
@@ -14,8 +17,6 @@ import (
 	"github.com/ava-labs/avalanchego/vms/platformvm/txs"
 	"github.com/ava-labs/avalanchego/vms/platformvm/txs/fee"
 	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/stretchr/testify/require"
 )
 
 // Txs should be prioritized by highest gas price during after Etna
