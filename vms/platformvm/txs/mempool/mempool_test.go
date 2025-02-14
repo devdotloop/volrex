@@ -88,6 +88,7 @@ func TestMempoolOrdering(t *testing.T) {
 	require.NoError(err)
 	require.Equal(wantComplexity, gotTx.Complexity)
 	wantGas, err := wantComplexity.ToGas(weights)
+	require.NoError(err)
 	require.Equal(wantGas, gotTx.Gas)
 
 	m.Remove(gotTx.Tx)
@@ -100,5 +101,6 @@ func TestMempoolOrdering(t *testing.T) {
 	require.NoError(err)
 	require.Equal(wantComplexity, gotTx.Complexity)
 	wantGas, err = wantComplexity.ToGas(weights)
+	require.NoError(err)
 	require.Equal(wantGas, gotTx.Gas)
 }
