@@ -5,10 +5,12 @@ package mempool
 
 import (
 	"testing"
+	"time"
 
 	"github.com/ava-labs/avalanchego/ids"
 	"github.com/ava-labs/avalanchego/vms/components/avax"
 	"github.com/ava-labs/avalanchego/vms/components/gas"
+	"github.com/ava-labs/avalanchego/vms/platformvm/config"
 	"github.com/ava-labs/avalanchego/vms/platformvm/txs"
 	"github.com/ava-labs/avalanchego/vms/platformvm/txs/fee"
 	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
@@ -16,12 +18,22 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// Txs should be prioritized by highest gas price
+// Txs should be prioritized by highest gas price during after Etna
 func TestMempoolOrdering(t *testing.T) {
 	require := require.New(t)
 
 	weights := gas.Dimensions{gas.Bandwidth: 1}
-	m, err := New("", prometheus.NewRegistry(), weights, nil)
+	m, err := New(
+		&config.Internal{
+			DynamicFeeConfig: gas.Config{
+				Weights: gas.Dimensions{1},
+			},
+		},
+		"",
+		prometheus.NewRegistry(),
+		time.Time{},
+		nil,
+	)
 	require.NoError(err)
 
 	lowTx := &txs.Tx{

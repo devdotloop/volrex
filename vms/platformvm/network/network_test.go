@@ -17,8 +17,8 @@ import (
 	"github.com/ava-labs/avalanchego/snow/engine/common"
 	"github.com/ava-labs/avalanchego/snow/engine/common/commonmock"
 	"github.com/ava-labs/avalanchego/snow/snowtest"
+	"github.com/ava-labs/avalanchego/upgrade"
 	"github.com/ava-labs/avalanchego/vms/components/avax"
-	"github.com/ava-labs/avalanchego/vms/components/gas"
 	"github.com/ava-labs/avalanchego/vms/platformvm/config"
 	"github.com/ava-labs/avalanchego/vms/platformvm/txs"
 	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
@@ -75,9 +75,14 @@ func TestNetworkIssueTxFromRPC(t *testing.T) {
 			name: "mempool has transaction",
 			mempool: func() *pmempool.Mempool {
 				mempool, err := pmempool.New(
+					&config.Internal{
+						UpgradeConfig: upgrade.Config{
+							EtnaTime: time.UnixMilli(1),
+						},
+					},
 					"",
 					prometheus.NewRegistry(),
-					gas.Dimensions{},
+					time.Time{},
 					nil,
 				)
 				require.NoError(t, err)
@@ -94,9 +99,14 @@ func TestNetworkIssueTxFromRPC(t *testing.T) {
 			name: "transaction marked as dropped in mempool",
 			mempool: func() *pmempool.Mempool {
 				mempool, err := pmempool.New(
+					&config.Internal{
+						UpgradeConfig: upgrade.Config{
+							EtnaTime: time.UnixMilli(1),
+						},
+					},
 					"",
 					prometheus.NewRegistry(),
-					gas.Dimensions{},
+					time.Time{},
 					nil,
 				)
 				require.NoError(t, err)
@@ -114,9 +124,14 @@ func TestNetworkIssueTxFromRPC(t *testing.T) {
 			name: "tx dropped",
 			mempool: func() *pmempool.Mempool {
 				mempool, err := pmempool.New(
+					&config.Internal{
+						UpgradeConfig: upgrade.Config{
+							EtnaTime: time.UnixMilli(1),
+						},
+					},
 					"",
 					prometheus.NewRegistry(),
-					gas.Dimensions{},
+					time.Time{},
 					nil,
 				)
 				require.NoError(t, err)
@@ -134,9 +149,14 @@ func TestNetworkIssueTxFromRPC(t *testing.T) {
 			name: "tx too big",
 			mempool: func() *pmempool.Mempool {
 				mempool, err := pmempool.New(
+					&config.Internal{
+						UpgradeConfig: upgrade.Config{
+							EtnaTime: time.UnixMilli(1),
+						},
+					},
 					"",
 					prometheus.NewRegistry(),
-					gas.Dimensions{},
+					time.Time{},
 					nil,
 				)
 				require.NoError(t, err)
@@ -158,9 +178,14 @@ func TestNetworkIssueTxFromRPC(t *testing.T) {
 			name: "tx conflicts",
 			mempool: func() *pmempool.Mempool {
 				mempool, err := pmempool.New(
+					&config.Internal{
+						UpgradeConfig: upgrade.Config{
+							EtnaTime: time.UnixMilli(1),
+						},
+					},
 					"",
 					prometheus.NewRegistry(),
-					gas.Dimensions{},
+					time.Time{},
 					nil,
 				)
 				require.NoError(t, err)
@@ -207,9 +232,14 @@ func TestNetworkIssueTxFromRPC(t *testing.T) {
 			name: "mempool full",
 			mempool: func() *pmempool.Mempool {
 				m, err := pmempool.New(
+					&config.Internal{
+						UpgradeConfig: upgrade.Config{
+							EtnaTime: time.UnixMilli(1),
+						},
+					},
 					"",
 					prometheus.NewRegistry(),
-					gas.Dimensions{},
+					time.Time{},
 					nil,
 				)
 				require.NoError(t, err)
@@ -239,9 +269,14 @@ func TestNetworkIssueTxFromRPC(t *testing.T) {
 			name: "happy path",
 			mempool: func() *pmempool.Mempool {
 				mempool, err := pmempool.New(
+					&config.Internal{
+						UpgradeConfig: upgrade.Config{
+							EtnaTime: time.UnixMilli(1),
+						},
+					},
 					"",
 					prometheus.NewRegistry(),
-					gas.Dimensions{},
+					time.Time{},
 					nil,
 				)
 				require.NoError(t, err)
