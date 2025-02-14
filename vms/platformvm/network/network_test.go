@@ -21,7 +21,6 @@ import (
 	"github.com/ava-labs/avalanchego/vms/components/avax"
 	"github.com/ava-labs/avalanchego/vms/platformvm/config"
 	"github.com/ava-labs/avalanchego/vms/platformvm/txs"
-	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
 	"github.com/ava-labs/avalanchego/vms/txs/mempool"
 
 	pmempool "github.com/ava-labs/avalanchego/vms/platformvm/txs/mempool"
@@ -196,7 +195,6 @@ func TestNetworkIssueTxFromRPC(t *testing.T) {
 							Ins: []*avax.TransferableInput{
 								{
 									UTXOID: avax.UTXOID{},
-									In:     &secp256k1fx.TransferInput{},
 								},
 							},
 						},
@@ -217,7 +215,6 @@ func TestNetworkIssueTxFromRPC(t *testing.T) {
 							Ins: []*avax.TransferableInput{
 								{
 									UTXOID: avax.UTXOID{},
-									In:     &secp256k1fx.TransferInput{},
 								},
 							},
 						},
