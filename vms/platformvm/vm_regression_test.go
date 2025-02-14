@@ -68,22 +68,31 @@ func TestAddDelegatorTxOverDelegatedRegression(t *testing.T) {
 		Addrs:     []ids.ShortID{ids.GenerateTestShortID()},
 	}
 
+	localSigner, err := localsigner.New()
+	require.NoError(err)
+
 	// create valid tx
-	addValidatorTx, err := wallet.IssueAddValidatorTx(
-		&txs.Validator{
-			NodeID: nodeID,
-			Start:  uint64(validatorStartTime.Unix()),
-			End:    uint64(validatorEndTime.Unix()),
-			Wght:   vm.MinValidatorStake,
+	addPermissionlessValidatorTx, err := wallet.IssueAddPermissionlessValidatorTx(
+		&txs.SubnetValidator{
+			Validator: txs.Validator{
+				NodeID: nodeID,
+				Start:  uint64(validatorStartTime.Unix()),
+				End:    uint64(validatorEndTime.Unix()),
+				Wght:   vm.MinValidatorStake,
+			},
+			Subnet: constants.PrimaryNetworkID,
 		},
+		signer.NewProofOfPossession(localSigner),
+		vm.ctx.AVAXAssetID,
 		rewardsOwner,
-		reward.PercentDenominator,
+		rewardsOwner,
+		0,
 	)
 	require.NoError(err)
 
 	// trigger block creation
 	vm.ctx.Lock.Unlock()
-	require.NoError(vm.issueTxFromRPC(addValidatorTx))
+	require.NoError(vm.issueTxFromRPC(addPermissionlessValidatorTx))
 	vm.ctx.Lock.Lock()
 
 	// Accept addValidatorTx
@@ -97,20 +106,24 @@ func TestAddDelegatorTxOverDelegatedRegression(t *testing.T) {
 	firstDelegatorEndTime := firstDelegatorStartTime.Add(vm.MinStakeDuration)
 
 	// create valid tx
-	addFirstDelegatorTx, err := wallet.IssueAddDelegatorTx(
-		&txs.Validator{
-			NodeID: nodeID,
-			Start:  uint64(firstDelegatorStartTime.Unix()),
-			End:    uint64(firstDelegatorEndTime.Unix()),
-			Wght:   4 * vm.MinValidatorStake, // maximum amount of stake this delegator can provide
+	addFirstPermissionlessDelegatorTx, err := wallet.IssueAddPermissionlessDelegatorTx(
+		&txs.SubnetValidator{
+			Validator: txs.Validator{
+				NodeID: nodeID,
+				Start:  uint64(firstDelegatorStartTime.Unix()),
+				End:    uint64(firstDelegatorEndTime.Unix()),
+				Wght:   4 * vm.MinValidatorStake, // maximum amount of stake this delegator can provide
+			},
+			Subnet: constants.PrimaryNetworkID,
 		},
+		vm.ctx.AVAXAssetID,
 		rewardsOwner,
 	)
 	require.NoError(err)
 
 	// trigger block creation
 	vm.ctx.Lock.Unlock()
-	require.NoError(vm.issueTxFromRPC(addFirstDelegatorTx))
+	require.NoError(vm.issueTxFromRPC(addFirstPermissionlessDelegatorTx))
 	vm.ctx.Lock.Lock()
 
 	// Accept addFirstDelegatorTx
@@ -126,20 +139,24 @@ func TestAddDelegatorTxOverDelegatedRegression(t *testing.T) {
 	vm.clock.Set(secondDelegatorStartTime.Add(-10 * executor.SyncBound))
 
 	// create valid tx
-	addSecondDelegatorTx, err := wallet.IssueAddDelegatorTx(
-		&txs.Validator{
-			NodeID: nodeID,
-			Start:  uint64(secondDelegatorStartTime.Unix()),
-			End:    uint64(secondDelegatorEndTime.Unix()),
-			Wght:   vm.MinDelegatorStake,
+	addSecondPermissionlessDelegatorTx, err := wallet.IssueAddPermissionlessDelegatorTx(
+		&txs.SubnetValidator{
+			Validator: txs.Validator{
+				NodeID: nodeID,
+				Start:  uint64(secondDelegatorStartTime.Unix()),
+				End:    uint64(secondDelegatorEndTime.Unix()),
+				Wght:   vm.MinDelegatorStake,
+			},
+			Subnet: constants.PrimaryNetworkID,
 		},
+		vm.ctx.AVAXAssetID,
 		rewardsOwner,
 	)
 	require.NoError(err)
 
 	// trigger block creation
 	vm.ctx.Lock.Unlock()
-	require.NoError(vm.issueTxFromRPC(addSecondDelegatorTx))
+	require.NoError(vm.issueTxFromRPC(addSecondPermissionlessDelegatorTx))
 	vm.ctx.Lock.Lock()
 
 	// Accept addSecondDelegatorTx
