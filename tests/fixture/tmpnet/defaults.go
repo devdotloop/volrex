@@ -63,17 +63,13 @@ func DefaultProcessFlags() FlagsMap {
 }
 
 // Flags appropriate for a node running as a local process
-func DefaultKubeFlags(includePluginDir bool) FlagsMap {
-	flags := FlagsMap{
+func DefaultKubeFlags() FlagsMap {
+	return FlagsMap{
 		config.HTTPHostKey:        "0.0.0.0", // Need to bind to pod IP to ensure kubelet can access the http port for readiness check
 		config.LogDisplayLevelKey: logging.Info.String(),
 		// TODO(marun) Revert
 		config.LogLevelKey: logging.Info.String(), // Assume collection of stdout logs
 	}
-	if includePluginDir {
-		flags[config.PluginDirKey] = "/avalanchego/build/plugins"
-	}
-	return flags
 }
 
 // Flags required by e2e testing

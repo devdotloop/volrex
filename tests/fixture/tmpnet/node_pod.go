@@ -108,11 +108,7 @@ func (p *NodePod) readState(ctx context.Context) error {
 }
 
 func (p *NodePod) SetDefaultFlags() {
-	// Only include the plugin dir if there are subnets to track to ensure an immutable path can be used
-	// TODO(marun) Revisit this comment
-	trackSubnets, err := p.node.Flags.GetStringVal(config.TrackSubnetsKey)
-	includePluginDir := err == nil && len(trackSubnets) > 0
-	p.node.Flags.SetDefaults(DefaultKubeFlags(includePluginDir))
+	p.node.Flags.SetDefaults(DefaultKubeFlags())
 }
 
 // TODO(marun) Maybe better with a timestamp used as input to generateName and include uuid and node id as labels?
