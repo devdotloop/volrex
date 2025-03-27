@@ -495,8 +495,14 @@ func (n *Network) StartNode(ctx context.Context, node *Node) error {
 //
 // TODO(marun) This no longer needs to be a method of Network - fold
 // it into the node restart method.
-func (*Network) RestartNodes(ctx context.Context, nodes ...*Node) error {
+func (n *Network) RestartNodes(ctx context.Context, nodes ...*Node) error {
 	for _, node := range nodes {
+		// TODO(marun) Using the content fields requires that they always be maintained on
+		// start/restart (vs on disk where they are always current). Refactor so this is
+		// cleaner.
+		if err := n.EnsureNodeConfig(node); err != nil {
+			return fmt.Errorf("failed to ensure node configuration: %w", err)
+		}
 		if err := node.Restart(ctx); err != nil {
 			return fmt.Errorf("failed to restart node %s: %w", node.NodeID, err)
 		}
@@ -912,6 +918,11 @@ func (n *Network) GetChainConfigContent() (string, error) {
 			}
 		}
 	}
+
+	// TODO(marun) Make debug or remove this line
+	n.Log.Info("collected configs",
+		zap.Any("chainConfigs", chainConfigs),
+	)
 
 	marshaledChainConfigs, err := json.Marshal(chainConfigs)
 	if err != nil {
