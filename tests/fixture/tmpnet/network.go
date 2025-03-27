@@ -583,9 +583,14 @@ func (n *Network) EnsureNodeConfig(node *Node) error {
 	if err != nil {
 		return err
 	}
-	defaultFlags := FlagsMap{
-		config.ChainConfigContentKey: chainConfigContent,
-	}
+
+	// Supplying this as part of initial configuration is not
+	// supported since tmpnet takes responsibility for chain creation
+	// and the chain IDs necessary for the configuration to be valid
+	// won't be known until chain creation.
+	flags[config.ChainConfigContentKey] = chainConfigContent
+
+	defaultFlags := FlagsMap{}
 	if n.Genesis != nil {
 		genesisFileContent, err := n.GetGenesisFileContent()
 		if err != nil {
@@ -895,6 +900,19 @@ func (n *Network) GetChainConfigContent() (string, error) {
 			Config: marshaledFlags,
 		}
 	}
+	for _, subnet := range n.Subnets {
+		for _, chain := range subnet.Chains {
+			if chain.ChainID == ids.Empty {
+				// The chain hasn't been created yet and it's not possible to supply
+				// configuration without a chain ID.
+				continue
+			}
+			chainConfigs[chain.ChainID.String()] = chains.ChainConfig{
+				Config: []byte(chain.Config),
+			}
+		}
+	}
+
 	marshaledChainConfigs, err := json.Marshal(chainConfigs)
 	if err != nil {
 		return "", fmt.Errorf("failed to marshal chain configs: %w", err)
