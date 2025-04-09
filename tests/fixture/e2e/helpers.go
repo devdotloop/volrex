@@ -271,8 +271,6 @@ func CheckBootstrapIsPossible(tc tests.TestContext, network *tmpnet.Network) *tm
 func StartNetwork(
 	tc tests.TestContext,
 	network *tmpnet.Network,
-	avalancheGoExecPath string,
-	pluginDir string,
 	shutdownDelay time.Duration,
 	skipShutdown bool,
 	reuseNetwork bool,
@@ -284,8 +282,6 @@ func StartNetwork(
 		tc.Log(),
 		network,
 		DefaultNetworkDir,
-		avalancheGoExecPath,
-		pluginDir,
 	)
 	if err != nil {
 		// Ensure nodes are stopped if bootstrap fails. The network configuration
