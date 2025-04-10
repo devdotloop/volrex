@@ -264,7 +264,7 @@ func CheckBootstrapIsPossible(tc tests.TestContext, network *tmpnet.Network) *tm
 		if node.IsEphemeral {
 			continue
 		}
-		healthy, err := node.IsHealthy(tc.DefaultContext())
+		healthy, err := node.IsHealthy(tc.DefaultContext(), tc.Log())
 		require.NoError(err)
 		require.True(healthy, "primary validator %s is not healthy", node.NodeID)
 	}
