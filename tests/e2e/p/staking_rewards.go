@@ -41,7 +41,7 @@ var _ = ginkgo.Describe("[Staking Rewards]", func() {
 
 			delegationPercent = 0.10 // 10%
 			delegationShare   = reward.PercentDenominator * delegationPercent
-			weight            = 2_000 * units.Avax
+			weight            = 2_000 * units.Volrex
 		)
 
 		var (
@@ -131,7 +131,7 @@ var _ = ginkgo.Describe("[Staking Rewards]", func() {
 					Subnet: constants.PrimaryNetworkID,
 				},
 				alphaPOP,
-				pContext.AVAXAssetID,
+				pContext.VOLREXAssetID,
 				&secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs:     []ids.ShortID{alphaValidationRewardKey.Address()},
@@ -164,7 +164,7 @@ var _ = ginkgo.Describe("[Staking Rewards]", func() {
 					Subnet: constants.PrimaryNetworkID,
 				},
 				betaPOP,
-				pContext.AVAXAssetID,
+				pContext.VOLREXAssetID,
 				&secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs:     []ids.ShortID{betaValidationRewardKey.Address()},
@@ -200,7 +200,7 @@ var _ = ginkgo.Describe("[Staking Rewards]", func() {
 					},
 					Subnet: constants.PrimaryNetworkID,
 				},
-				pContext.AVAXAssetID,
+				pContext.VOLREXAssetID,
 				&secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs:     []ids.ShortID{gammaDelegationRewardKey.Address()},
@@ -227,7 +227,7 @@ var _ = ginkgo.Describe("[Staking Rewards]", func() {
 					},
 					Subnet: constants.PrimaryNetworkID,
 				},
-				pContext.AVAXAssetID,
+				pContext.VOLREXAssetID,
 				&secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs:     []ids.ShortID{deltaDelegationRewardKey.Address()},
@@ -294,7 +294,7 @@ var _ = ginkgo.Describe("[Staking Rewards]", func() {
 
 				balances, err := pBuilder.GetBalance()
 				require.NoError(err)
-				rewardBalances[rewardKey.Address()] = balances[pContext.AVAXAssetID]
+				rewardBalances[rewardKey.Address()] = balances[pContext.VOLREXAssetID]
 			}
 
 			require.Equal(

@@ -58,7 +58,7 @@ func TestBaseTxExecutor(t *testing.T) {
 		UTXOID: utxoID,
 		Asset:  avax.Asset{ID: assetID},
 		Out: &secp256k1fx.TransferOutput{
-			Amt: 20 * units.KiloAvax,
+			Amt: 20 * units.KiloVolrex,
 			OutputOwners: secp256k1fx.OutputOwners{
 				Threshold: 1,
 				Addrs: []ids.ShortID{
@@ -79,7 +79,7 @@ func TestBaseTxExecutor(t *testing.T) {
 			UTXOID: utxoID,
 			Asset:  avax.Asset{ID: assetID},
 			In: &secp256k1fx.TransferInput{
-				Amt: 20 * units.KiloAvax,
+				Amt: 20 * units.KiloVolrex,
 				Input: secp256k1fx.Input{
 					SigIndices: []uint32{
 						0,
@@ -90,7 +90,7 @@ func TestBaseTxExecutor(t *testing.T) {
 		Outs: []*avax.TransferableOutput{{
 			Asset: avax.Asset{ID: assetID},
 			Out: &secp256k1fx.TransferOutput{
-				Amt: 10 * units.KiloAvax,
+				Amt: 10 * units.KiloVolrex,
 				OutputOwners: secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs:     []ids.ShortID{addr},
@@ -123,7 +123,7 @@ func TestBaseTxExecutor(t *testing.T) {
 			ID: assetID,
 		},
 		Out: &secp256k1fx.TransferOutput{
-			Amt: 10 * units.KiloAvax,
+			Amt: 10 * units.KiloVolrex,
 			OutputOwners: secp256k1fx.OutputOwners{
 				Threshold: 1,
 				Addrs:     []ids.ShortID{addr},
@@ -165,7 +165,7 @@ func TestCreateAssetTxExecutor(t *testing.T) {
 		UTXOID: utxoID,
 		Asset:  avax.Asset{ID: assetID},
 		Out: &secp256k1fx.TransferOutput{
-			Amt: 20 * units.KiloAvax,
+			Amt: 20 * units.KiloVolrex,
 			OutputOwners: secp256k1fx.OutputOwners{
 				Threshold: 1,
 				Addrs: []ids.ShortID{
@@ -187,7 +187,7 @@ func TestCreateAssetTxExecutor(t *testing.T) {
 				UTXOID: utxoID,
 				Asset:  avax.Asset{ID: assetID},
 				In: &secp256k1fx.TransferInput{
-					Amt: 20 * units.KiloAvax,
+					Amt: 20 * units.KiloVolrex,
 					Input: secp256k1fx.Input{
 						SigIndices: []uint32{
 							0,
@@ -198,7 +198,7 @@ func TestCreateAssetTxExecutor(t *testing.T) {
 			Outs: []*avax.TransferableOutput{{
 				Asset: avax.Asset{ID: assetID},
 				Out: &secp256k1fx.TransferOutput{
-					Amt: 10 * units.KiloAvax,
+					Amt: 10 * units.KiloVolrex,
 					OutputOwners: secp256k1fx.OutputOwners{
 						Threshold: 1,
 						Addrs:     []ids.ShortID{addr},
@@ -250,7 +250,7 @@ func TestCreateAssetTxExecutor(t *testing.T) {
 				ID: assetID,
 			},
 			Out: &secp256k1fx.TransferOutput{
-				Amt: 10 * units.KiloAvax,
+				Amt: 10 * units.KiloVolrex,
 				OutputOwners: secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs:     []ids.ShortID{addr},
@@ -315,7 +315,7 @@ func TestOperationTxExecutor(t *testing.T) {
 		UTXOID: utxoID,
 		Asset:  avax.Asset{ID: assetID},
 		Out: &secp256k1fx.TransferOutput{
-			Amt:          20 * units.KiloAvax,
+			Amt:          20 * units.KiloVolrex,
 			OutputOwners: outputOwners,
 		},
 	}
@@ -345,7 +345,7 @@ func TestOperationTxExecutor(t *testing.T) {
 				UTXOID: utxoID,
 				Asset:  avax.Asset{ID: assetID},
 				In: &secp256k1fx.TransferInput{
-					Amt: 20 * units.KiloAvax,
+					Amt: 20 * units.KiloVolrex,
 					Input: secp256k1fx.Input{
 						SigIndices: []uint32{
 							0,
@@ -356,7 +356,7 @@ func TestOperationTxExecutor(t *testing.T) {
 			Outs: []*avax.TransferableOutput{{
 				Asset: avax.Asset{ID: assetID},
 				Out: &secp256k1fx.TransferOutput{
-					Amt:          10 * units.KiloAvax,
+					Amt:          10 * units.KiloVolrex,
 					OutputOwners: outputOwners,
 				},
 			}},
@@ -415,7 +415,7 @@ func TestOperationTxExecutor(t *testing.T) {
 				ID: assetID,
 			},
 			Out: &secp256k1fx.TransferOutput{
-				Amt:          10 * units.KiloAvax,
+				Amt:          10 * units.KiloVolrex,
 				OutputOwners: outputOwners,
 			},
 		},

@@ -73,7 +73,7 @@ func newTestState(t testing.TB, db database.Database) *state {
 			MaxConsumptionRate: .12 * reward.PercentDenominator,
 			MinConsumptionRate: .1 * reward.PercentDenominator,
 			MintingPeriod:      365 * 24 * time.Hour,
-			SupplyCap:          720 * units.MegaAvax,
+			SupplyCap:          720 * units.MegaVolrex,
 		}),
 	)
 	require.NoError(t, err)
@@ -568,7 +568,7 @@ func createPermissionlessValidatorTx(t testing.TB, subnetID ids.ID, validatorsDa
 							ID: ids.GenerateTestID(),
 						},
 						In: &secp256k1fx.TransferInput{
-							Amt: 2 * units.KiloAvax,
+							Amt: 2 * units.KiloVolrex,
 							Input: secp256k1fx.Input{
 								SigIndices: []uint32{1},
 							},
@@ -588,7 +588,7 @@ func createPermissionlessValidatorTx(t testing.TB, subnetID ids.ID, validatorsDa
 					ID: ids.GenerateTestID(),
 				},
 				Out: &secp256k1fx.TransferOutput{
-					Amt: 2 * units.KiloAvax,
+					Amt: 2 * units.KiloVolrex,
 					OutputOwners: secp256k1fx.OutputOwners{
 						Locktime:  0,
 						Threshold: 1,
@@ -634,7 +634,7 @@ func createPermissionlessDelegatorTx(subnetID ids.ID, delegatorData txs.Validato
 							ID: ids.GenerateTestID(),
 						},
 						In: &secp256k1fx.TransferInput{
-							Amt: 2 * units.KiloAvax,
+							Amt: 2 * units.KiloVolrex,
 							Input: secp256k1fx.Input{
 								SigIndices: []uint32{1},
 							},
@@ -653,7 +653,7 @@ func createPermissionlessDelegatorTx(subnetID ids.ID, delegatorData txs.Validato
 					ID: ids.GenerateTestID(),
 				},
 				Out: &secp256k1fx.TransferOutput{
-					Amt: 2 * units.KiloAvax,
+					Amt: 2 * units.KiloVolrex,
 					OutputOwners: secp256k1fx.OutputOwners{
 						Locktime:  0,
 						Threshold: 1,

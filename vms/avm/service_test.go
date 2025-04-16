@@ -1880,7 +1880,7 @@ func newAvaxBaseTxWithOutputs(t *testing.T, env *environment) *txs.Tx {
 		[]*avax.TransferableOutput{{
 			Asset: avax.Asset{ID: env.vm.feeAssetID},
 			Out: &secp256k1fx.TransferOutput{
-				Amt: units.MicroAvax,
+				Amt: units.MicroVolrex,
 				OutputOwners: secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs:     []ids.ShortID{key.PublicKey().Address()},
@@ -1924,7 +1924,7 @@ func buildTestExportTx(t *testing.T, env *environment, chainID ids.ID) *txs.Tx {
 		chainID,
 		to,
 		env.vm.feeAssetID,
-		units.MicroAvax,
+		units.MicroVolrex,
 		kc,
 		key.Address(),
 	)
@@ -2065,7 +2065,7 @@ func TestServiceGetUTXOs(t *testing.T) {
 			UTXOID: avax.UTXOID{
 				TxID: ids.GenerateTestID(),
 			},
-			Asset: avax.Asset{ID: env.vm.ctx.AVAXAssetID},
+			Asset: avax.Asset{ID: env.vm.ctx.VOLREXAssetID},
 			Out: &secp256k1fx.TransferOutput{
 				Amt: 1,
 				OutputOwners: secp256k1fx.OutputOwners{
@@ -2087,7 +2087,7 @@ func TestServiceGetUTXOs(t *testing.T) {
 			UTXOID: avax.UTXOID{
 				TxID: ids.GenerateTestID(),
 			},
-			Asset: avax.Asset{ID: env.vm.ctx.AVAXAssetID},
+			Asset: avax.Asset{ID: env.vm.ctx.VOLREXAssetID},
 			Out: &secp256k1fx.TransferOutput{
 				Amt: 1,
 				OutputOwners: secp256k1fx.OutputOwners{
@@ -2307,11 +2307,11 @@ func TestGetAssetDescription(t *testing.T) {
 	service := &Service{vm: env.vm}
 	env.vm.ctx.Lock.Unlock()
 
-	avaxAssetID := env.genesisTx.ID()
+	volrexAssetID := env.genesisTx.ID()
 
 	reply := GetAssetDescriptionReply{}
 	require.NoError(service.GetAssetDescription(nil, &GetAssetDescriptionArgs{
-		AssetID: avaxAssetID.String(),
+		AssetID: volrexAssetID.String(),
 	}, &reply))
 
 	require.Equal("AVAX", reply.Name)
@@ -2327,14 +2327,14 @@ func TestGetBalance(t *testing.T) {
 	service := &Service{vm: env.vm}
 	env.vm.ctx.Lock.Unlock()
 
-	avaxAssetID := env.genesisTx.ID()
+	volrexAssetID := env.genesisTx.ID()
 
 	reply := GetBalanceReply{}
 	addrStr, err := env.vm.FormatLocalAddress(keys[0].PublicKey().Address())
 	require.NoError(err)
 	require.NoError(service.GetBalance(nil, &GetBalanceArgs{
 		Address: addrStr,
-		AssetID: avaxAssetID.String(),
+		AssetID: volrexAssetID.String(),
 	}, &reply))
 
 	require.Equal(startBalance, uint64(reply.Balance))

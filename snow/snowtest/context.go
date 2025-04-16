@@ -22,10 +22,10 @@ import (
 )
 
 var (
-	XChainID    = ids.GenerateTestID()
-	CChainID    = ids.GenerateTestID()
-	PChainID    = constants.PlatformChainID
-	AVAXAssetID = ids.GenerateTestID()
+	XChainID      = ids.GenerateTestID()
+	CChainID      = ids.GenerateTestID()
+	PChainID      = constants.PlatformChainID
+	VOLREXAssetID = ids.GenerateTestID()
 
 	errMissing = errors.New("missing")
 
@@ -89,9 +89,9 @@ func Context(tb testing.TB, chainID ids.ID) *snow.Context {
 		PublicKey:       publicKey,
 		NetworkUpgrades: upgradetest.GetConfig(upgradetest.Latest),
 
-		XChainID:    XChainID,
-		CChainID:    CChainID,
-		AVAXAssetID: AVAXAssetID,
+		XChainID:      XChainID,
+		CChainID:      CChainID,
+		VOLREXAssetID: VOLREXAssetID,
 
 		Log:      logging.NoLog{},
 		BCLookup: aliaser,

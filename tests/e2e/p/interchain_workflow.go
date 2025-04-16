@@ -34,8 +34,8 @@ var _ = e2e.DescribePChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 
 	ginkgo.It("should ensure that funds can be transferred from the P-Chain to the X-Chain and the C-Chain", func() {
 		const (
-			transferAmount = 10 * units.Avax
-			weight         = 2_000 * units.Avax // Used for both validation and delegation
+			transferAmount = 10 * units.Volrex
+			weight         = 2_000 * units.Volrex // Used for both validation and delegation
 		)
 
 		var (
@@ -69,7 +69,7 @@ var _ = e2e.DescribePChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 			cBuilder = cWallet.Builder()
 			cContext = cBuilder.Context()
 
-			avaxAssetID = xContext.AVAXAssetID
+			volrexAssetID = xContext.VOLREXAssetID
 		)
 
 		tc.By("defining common configuration")
@@ -85,7 +85,7 @@ var _ = e2e.DescribePChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 		exportOutputs := []*avax.TransferableOutput{
 			{
 				Asset: avax.Asset{
-					ID: avaxAssetID,
+					ID: volrexAssetID,
 				},
 				Out: &secp256k1fx.TransferOutput{
 					Amt: transferAmount,
@@ -140,7 +140,7 @@ var _ = e2e.DescribePChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 					Subnet: constants.PrimaryNetworkID,
 				},
 				nodePOP,
-				pContext.AVAXAssetID,
+				pContext.VOLREXAssetID,
 				&secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs:     []ids.ShortID{rewardAddr},
@@ -172,7 +172,7 @@ var _ = e2e.DescribePChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 					},
 					Subnet: constants.PrimaryNetworkID,
 				},
-				pContext.AVAXAssetID,
+				pContext.VOLREXAssetID,
 				&secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs:     []ids.ShortID{rewardAddr},
@@ -208,7 +208,7 @@ var _ = e2e.DescribePChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 				recipientKey.Address(),
 			)))
 			require.NoError(err)
-			require.Positive(balances[avaxAssetID])
+			require.Positive(balances[volrexAssetID])
 		})
 
 		tc.By("exporting AVAX from the P-Chain to the C-Chain", func() {

@@ -87,7 +87,7 @@ func main() {
 		genesisXWallet  = wallet.X()
 		genesisXBuilder = genesisXWallet.Builder()
 		genesisXContext = genesisXBuilder.Context()
-		avaxAssetID     = genesisXContext.AVAXAssetID
+		volrexAssetID   = genesisXContext.VOLREXAssetID
 	)
 	for i := 1; i < NumKeys; i++ {
 		key, err := secp256k1.NewPrivateKey()
@@ -99,10 +99,10 @@ func main() {
 		)
 		baseTx, err := genesisXWallet.IssueBaseTx([]*avax.TransferableOutput{{
 			Asset: avax.Asset{
-				ID: avaxAssetID,
+				ID: volrexAssetID,
 			},
 			Out: &secp256k1fx.TransferOutput{
-				Amt: 100 * units.KiloAvax,
+				Amt: 100 * units.KiloVolrex,
 				OutputOwners: secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs: []ids.ShortID{
@@ -229,14 +229,14 @@ func (w *workload) issueXChainBaseTx(ctx context.Context) {
 
 	var (
 		xContext      = xBuilder.Context()
-		avaxAssetID   = xContext.AVAXAssetID
-		avaxBalance   = balances[avaxAssetID]
+		volrexAssetID = xContext.VOLREXAssetID
+		volrexBalance = balances[volrexAssetID]
 		baseTxFee     = xContext.BaseTxFee
 		neededBalance = baseTxFee + units.Schmeckle
 	)
-	if avaxBalance < neededBalance {
+	if volrexBalance < neededBalance {
 		w.log.Info("skipping X-chain tx issuance due to insufficient balance",
-			zap.Uint64("balance", avaxBalance),
+			zap.Uint64("balance", volrexBalance),
 			zap.Uint64("neededBalance", neededBalance),
 		)
 		return
@@ -250,7 +250,7 @@ func (w *workload) issueXChainBaseTx(ctx context.Context) {
 		[]*avax.TransferableOutput{
 			{
 				Asset: avax.Asset{
-					ID: avaxAssetID,
+					ID: volrexAssetID,
 				},
 				Out: &secp256k1fx.TransferOutput{
 					Amt:          units.Schmeckle,
@@ -301,13 +301,13 @@ func (w *workload) issueXChainCreateAssetTx(ctx context.Context) {
 
 	var (
 		xContext      = xBuilder.Context()
-		avaxAssetID   = xContext.AVAXAssetID
-		avaxBalance   = balances[avaxAssetID]
+		volrexAssetID = xContext.VOLREXAssetID
+		volrexBalance = balances[volrexAssetID]
 		neededBalance = xContext.CreateAssetTxFee
 	)
-	if avaxBalance < neededBalance {
+	if volrexBalance < neededBalance {
 		w.log.Info("skipping X-chain tx issuance due to insufficient balance",
-			zap.Uint64("balance", avaxBalance),
+			zap.Uint64("balance", volrexBalance),
 			zap.Uint64("neededBalance", neededBalance),
 		)
 		return
@@ -372,15 +372,15 @@ func (w *workload) issueXChainOperationTx(ctx context.Context) {
 
 	var (
 		xContext         = xBuilder.Context()
-		avaxAssetID      = xContext.AVAXAssetID
-		avaxBalance      = balances[avaxAssetID]
+		volrexAssetID    = xContext.VOLREXAssetID
+		volrexBalance    = balances[volrexAssetID]
 		createAssetTxFee = xContext.CreateAssetTxFee
 		baseTxFee        = xContext.BaseTxFee
 		neededBalance    = createAssetTxFee + baseTxFee
 	)
-	if avaxBalance < neededBalance {
+	if volrexBalance < neededBalance {
 		w.log.Info("skipping X-chain tx issuance due to insufficient balance",
-			zap.Uint64("balance", avaxBalance),
+			zap.Uint64("balance", volrexBalance),
 			zap.Uint64("neededBalance", neededBalance),
 		)
 		return
@@ -472,14 +472,14 @@ func (w *workload) issueXToPTransfer(ctx context.Context) {
 
 	var (
 		xContext      = xBuilder.Context()
-		avaxAssetID   = xContext.AVAXAssetID
-		avaxBalance   = balances[avaxAssetID]
+		volrexAssetID = xContext.VOLREXAssetID
+		volrexBalance = balances[volrexAssetID]
 		xBaseTxFee    = xContext.BaseTxFee
-		neededBalance = xBaseTxFee + units.Avax
+		neededBalance = xBaseTxFee + units.Volrex
 	)
-	if avaxBalance < neededBalance {
+	if volrexBalance < neededBalance {
 		w.log.Info("skipping X-chain tx issuance due to insufficient balance",
-			zap.Uint64("balance", avaxBalance),
+			zap.Uint64("balance", volrexBalance),
 			zap.Uint64("neededBalance", neededBalance),
 		)
 		return
@@ -493,10 +493,10 @@ func (w *workload) issueXToPTransfer(ctx context.Context) {
 		constants.PlatformChainID,
 		[]*avax.TransferableOutput{{
 			Asset: avax.Asset{
-				ID: avaxAssetID,
+				ID: volrexAssetID,
 			},
 			Out: &secp256k1fx.TransferOutput{
-				Amt: units.Avax,
+				Amt: units.Volrex,
 			},
 		}},
 	)
@@ -575,14 +575,14 @@ func (w *workload) issuePToXTransfer(ctx context.Context) {
 	var (
 		xContext      = xBuilder.Context()
 		pContext      = pBuilder.Context()
-		avaxAssetID   = pContext.AVAXAssetID
-		avaxBalance   = balances[avaxAssetID]
+		volrexAssetID = pContext.VOLREXAssetID
+		volrexBalance = balances[volrexAssetID]
 		txFees        = xContext.BaseTxFee
 		neededBalance = txFees + units.Schmeckle
 	)
-	if avaxBalance < neededBalance {
+	if volrexBalance < neededBalance {
 		w.log.Info("skipping P-chain tx issuance due to insufficient balance",
-			zap.Uint64("balance", avaxBalance),
+			zap.Uint64("balance", volrexBalance),
 			zap.Uint64("neededBalance", neededBalance),
 		)
 		return
@@ -597,7 +597,7 @@ func (w *workload) issuePToXTransfer(ctx context.Context) {
 		xChainID,
 		[]*avax.TransferableOutput{{
 			Asset: avax.Asset{
-				ID: avaxAssetID,
+				ID: volrexAssetID,
 			},
 			Out: &secp256k1fx.TransferOutput{
 				Amt: units.Schmeckle,

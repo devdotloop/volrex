@@ -23,7 +23,7 @@ var _ = e2e.DescribeXChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 	tc := e2e.NewTestContext()
 	require := require.New(tc)
 
-	const transferAmount = 10 * units.Avax
+	const transferAmount = 10 * units.Volrex
 
 	ginkgo.It("should ensure that funds can be transferred from the X-Chain to the C-Chain and the P-Chain", func() {
 		env := e2e.GetEnv(tc)
@@ -45,7 +45,7 @@ var _ = e2e.DescribeXChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 		xContext := xBuilder.Context()
 		cBuilder := cWallet.Builder()
 		cContext := cBuilder.Context()
-		avaxAssetID := xContext.AVAXAssetID
+		volrexAssetID := xContext.VOLREXAssetID
 		// Use the same owner for sending to X-Chain and importing funds to P-Chain
 		recipientOwner := secp256k1fx.OutputOwners{
 			Threshold: 1,
@@ -57,7 +57,7 @@ var _ = e2e.DescribeXChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 		exportOutputs := []*avax.TransferableOutput{
 			{
 				Asset: avax.Asset{
-					ID: avaxAssetID,
+					ID: volrexAssetID,
 				},
 				Out: &secp256k1fx.TransferOutput{
 					Amt: transferAmount,
@@ -83,7 +83,7 @@ var _ = e2e.DescribeXChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 			_, err := xWallet.IssueBaseTx(
 				[]*avax.TransferableOutput{{
 					Asset: avax.Asset{
-						ID: avaxAssetID,
+						ID: volrexAssetID,
 					},
 					Out: &secp256k1fx.TransferOutput{
 						Amt:          transferAmount,
@@ -101,7 +101,7 @@ var _ = e2e.DescribeXChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 				recipientKey.Address(),
 			)))
 			require.NoError(err)
-			require.Positive(balances[avaxAssetID])
+			require.Positive(balances[volrexAssetID])
 		})
 
 		tc.By("exporting AVAX from the X-Chain to the C-Chain", func() {
@@ -160,7 +160,7 @@ var _ = e2e.DescribeXChain("[Interchain Workflow]", ginkgo.Label(e2e.UsesCChainL
 				recipientKey.Address(),
 			)))
 			require.NoError(err)
-			require.Positive(balances[avaxAssetID])
+			require.Positive(balances[volrexAssetID])
 		})
 
 		_ = e2e.CheckBootstrapIsPossible(tc, env.GetNetwork())

@@ -297,7 +297,7 @@ func addPrimaryValidatorWithBLSKey(t testing.TB, vm *VM, data *validatorInputDat
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop,
-		vm.ctx.AVAXAssetID,
+		vm.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		reward.PercentDenominator,

@@ -1,4 +1,5 @@
-module github.com/ava-labs/avalanchego
+// module github.com/ava-labs/avalanchego
+module github.com/devdotloop/volrex
 
 // - Changes to the minimum golang version must also be replicated in:
 //   - CONTRIBUTING.md
@@ -14,6 +15,7 @@ require (
 	github.com/NYTimes/gziphandler v1.1.1
 	github.com/StephenButtolph/canoto v0.15.0
 	github.com/antithesishq/antithesis-sdk-go v0.3.8
+	github.com/ava-labs/avalanchego v1.12.3-name-fortuna.0
 	github.com/ava-labs/coreth v0.15.0-rc.0
 	github.com/ava-labs/ledger-avalanche/go v0.0.0-20241009183145-e6f90a8a1a60
 	github.com/btcsuite/btcd/btcutil v1.1.3
@@ -107,7 +109,6 @@ require (
 	github.com/emicklei/go-restful/v3 v3.11.0 // indirect
 	github.com/ethereum/c-kzg-4844 v0.4.0 // indirect
 	github.com/fatih/structtag v1.2.0 // indirect
-	github.com/frankban/quicktest v1.14.4 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gballet/go-libpcsclite v0.0.0-20191108122812-4678299bea08 // indirect
 	github.com/gballet/go-verkle v0.1.1-0.20231031103413-a67434b50f46 // indirect
@@ -195,4 +196,11 @@ require (
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.4.1 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
+)
+
+replace (
+	github.com/ava-labs/avalanchego => ../volrex-blockchain
+	github.com/ava-labs/coreth => ../coreth
+	github.com/ava-labs/ledger-avalanche/go => ../ledger-volrex
+	github.com/devdotloop/volrex => ../ledger-blockchain
 )

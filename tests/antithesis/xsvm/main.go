@@ -79,7 +79,7 @@ func main() {
 	workloads := make([]*workload, NumKeys)
 	workloads[0] = genesisWorkload
 
-	initialAmount := 100 * units.KiloAvax
+	initialAmount := 100 * units.KiloVolrex
 	for i := 1; i < NumKeys; i++ {
 		key, err := secp256k1.NewPrivateKey()
 		require.NoError(err, "failed to generate key")

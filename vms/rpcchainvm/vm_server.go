@@ -127,7 +127,7 @@ func (vm *VMServer) Initialize(ctx context.Context, req *vmpb.InitializeRequest)
 	if err != nil {
 		return nil, err
 	}
-	avaxAssetID, err := ids.ToID(req.AvaxAssetId)
+	volrexAssetID, err := ids.ToID(req.AvaxAssetId)
 	if err != nil {
 		return nil, err
 	}
@@ -240,9 +240,9 @@ func (vm *VMServer) Initialize(ctx context.Context, req *vmpb.InitializeRequest)
 		PublicKey:       publicKey,
 		NetworkUpgrades: networkUpgrades,
 
-		XChainID:    xChainID,
-		CChainID:    cChainID,
-		AVAXAssetID: avaxAssetID,
+		XChainID:      xChainID,
+		CChainID:      cChainID,
+		VOLREXAssetID: volrexAssetID,
 
 		Log:          vm.log,
 		SharedMemory: sharedMemoryClient,

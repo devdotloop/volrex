@@ -64,7 +64,7 @@ func ExampleWallet() {
 		map[uint32][]verify.State{
 			0: {
 				&secp256k1fx.TransferOutput{
-					Amt:          100 * units.MegaAvax,
+					Amt:          100 * units.MegaVolrex,
 					OutputOwners: *owner,
 				},
 			},
@@ -77,7 +77,7 @@ func ExampleWallet() {
 	createAssetTxID := createAssetTx.ID()
 	log.Printf("created X-chain asset %s in %s\n", createAssetTxID, time.Since(createAssetStartTime))
 
-	// Send 100 MegaAvax to the P-chain.
+	// Send 100 MegaVolrex to the P-chain.
 	exportStartTime := time.Now()
 	exportTx, err := xWallet.IssueExportTx(
 		constants.PlatformChainID,
@@ -87,7 +87,7 @@ func ExampleWallet() {
 					ID: createAssetTxID,
 				},
 				Out: &secp256k1fx.TransferOutput{
-					Amt:          100 * units.MegaAvax,
+					Amt:          100 * units.MegaVolrex,
 					OutputOwners: *owner,
 				},
 			},
@@ -100,7 +100,7 @@ func ExampleWallet() {
 	exportTxID := exportTx.ID()
 	log.Printf("issued X->P export %s in %s\n", exportTxID, time.Since(exportStartTime))
 
-	// Import the 100 MegaAvax from the X-chain into the P-chain.
+	// Import the 100 MegaVolrex from the X-chain into the P-chain.
 	importStartTime := time.Now()
 	importTx, err := pWallet.IssueImportTx(xChainID, owner)
 	if err != nil {
@@ -123,12 +123,12 @@ func ExampleWallet() {
 	transformSubnetTx, err := pWallet.IssueTransformSubnetTx(
 		createSubnetTxID,
 		createAssetTxID,
-		50*units.MegaAvax,
-		100*units.MegaAvax,
+		50*units.MegaVolrex,
+		100*units.MegaVolrex,
 		reward.PercentDenominator,
 		reward.PercentDenominator,
 		1,
-		100*units.MegaAvax,
+		100*units.MegaVolrex,
 		time.Second,
 		365*24*time.Hour,
 		0,
@@ -151,7 +151,7 @@ func ExampleWallet() {
 				NodeID: genesis.LocalConfig.InitialStakers[0].NodeID,
 				Start:  uint64(startTime.Unix()),
 				End:    uint64(startTime.Add(5 * time.Second).Unix()),
-				Wght:   25 * units.MegaAvax,
+				Wght:   25 * units.MegaVolrex,
 			},
 			Subnet: createSubnetTxID,
 		},
@@ -175,7 +175,7 @@ func ExampleWallet() {
 				NodeID: genesis.LocalConfig.InitialStakers[0].NodeID,
 				Start:  uint64(startTime.Unix()),
 				End:    uint64(startTime.Add(5 * time.Second).Unix()),
-				Wght:   25 * units.MegaAvax,
+				Wght:   25 * units.MegaVolrex,
 			},
 			Subnet: createSubnetTxID,
 		},

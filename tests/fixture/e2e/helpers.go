@@ -110,10 +110,10 @@ func GetWalletBalances(tc tests.TestContext, wallet *primary.Wallet) (uint64, ui
 	pBalances, err := pBuilder.GetBalance()
 	require.NoError(err, "failed to fetch P-chain balances")
 	var (
-		xContext    = xBuilder.Context()
-		avaxAssetID = xContext.AVAXAssetID
-		xAVAX       = xBalances[avaxAssetID]
-		pAVAX       = pBalances[avaxAssetID]
+		xContext      = xBuilder.Context()
+		volrexAssetID = xContext.VOLREXAssetID
+		xAVAX         = xBalances[volrexAssetID]
+		pAVAX         = pBalances[volrexAssetID]
 	)
 	tc.Log().Info("wallet balances in nAVAX",
 		zap.Uint64("xChain", xAVAX),

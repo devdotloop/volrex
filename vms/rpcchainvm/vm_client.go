@@ -210,7 +210,7 @@ func (vm *VMClient) Initialize(
 		NetworkUpgrades: networkUpgrades,
 		XChainId:        chainCtx.XChainID[:],
 		CChainId:        chainCtx.CChainID[:],
-		AvaxAssetId:     chainCtx.AVAXAssetID[:],
+		AvaxAssetId:     chainCtx.VOLREXAssetID[:],
 		ChainDataDir:    chainCtx.ChainDataDir,
 		GenesisBytes:    genesisBytes,
 		UpgradeBytes:    upgradeBytes,

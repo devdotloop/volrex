@@ -523,7 +523,7 @@ func TestRejectedStateRegressionInvalidValidatorTimestamp(t *testing.T) {
 			TxID: ids.GenerateTestID(),
 		},
 		Asset: avax.Asset{
-			ID: vm.ctx.AVAXAssetID,
+			ID: vm.ctx.VOLREXAssetID,
 		},
 		Out: &secp256k1fx.TransferOutput{
 			Amt:          1,
@@ -755,7 +755,7 @@ func TestRejectedStateRegressionInvalidValidatorReward(t *testing.T) {
 			TxID: ids.GenerateTestID(),
 		},
 		Asset: avax.Asset{
-			ID: vm.ctx.AVAXAssetID,
+			ID: vm.ctx.VOLREXAssetID,
 		},
 		Out: &secp256k1fx.TransferOutput{
 			Amt:          1,
@@ -1496,7 +1496,7 @@ func TestSubnetValidatorBLSKeyDiffAfterExpiry(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop1,
-		vm.ctx.AVAXAssetID,
+		vm.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		reward.PercentDenominator,
@@ -1603,7 +1603,7 @@ func TestSubnetValidatorBLSKeyDiffAfterExpiry(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop2,
-		vm.ctx.AVAXAssetID,
+		vm.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		reward.PercentDenominator,
@@ -1770,7 +1770,7 @@ func TestPrimaryNetworkValidatorPopulatedToEmptyBLSKeyDiff(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop,
-		vm.ctx.AVAXAssetID,
+		vm.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		reward.PercentDenominator,
@@ -1941,7 +1941,7 @@ func TestSubnetValidatorPopulatedToEmptyBLSKeyDiff(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop2,
-		vm.ctx.AVAXAssetID,
+		vm.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		reward.PercentDenominator,

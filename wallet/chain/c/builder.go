@@ -161,11 +161,11 @@ func (b *builder) GetImportableBalance(
 	var (
 		addrs           = ops.Addresses(b.avaxAddrs)
 		minIssuanceTime = ops.MinIssuanceTime()
-		avaxAssetID     = b.context.AVAXAssetID
+		volrexAssetID   = b.context.VOLREXAssetID
 		balance         uint64
 	)
 	for _, utxo := range utxos {
-		amount, _, ok := getSpendableAmount(utxo, addrs, minIssuanceTime, avaxAssetID)
+		amount, _, ok := getSpendableAmount(utxo, addrs, minIssuanceTime, volrexAssetID)
 		if !ok {
 			continue
 		}
@@ -195,13 +195,13 @@ func (b *builder) NewImportTx(
 	var (
 		addrs           = ops.Addresses(b.avaxAddrs)
 		minIssuanceTime = ops.MinIssuanceTime()
-		avaxAssetID     = b.context.AVAXAssetID
+		volrexAssetID   = b.context.VOLREXAssetID
 
 		importedInputs = make([]*avax.TransferableInput, 0, len(utxos))
 		importedAmount uint64
 	)
 	for _, utxo := range utxos {
-		amount, inputSigIndices, ok := getSpendableAmount(utxo, addrs, minIssuanceTime, avaxAssetID)
+		amount, inputSigIndices, ok := getSpendableAmount(utxo, addrs, minIssuanceTime, volrexAssetID)
 		if !ok {
 			continue
 		}
@@ -257,7 +257,7 @@ func (b *builder) NewImportTx(
 	tx.Outs = []atomic.EVMOutput{{
 		Address: to,
 		Amount:  importedAmount - txFee,
-		AssetID: avaxAssetID,
+		AssetID: volrexAssetID,
 	}}
 	return tx, nil
 }
@@ -269,13 +269,13 @@ func (b *builder) NewExportTx(
 	options ...common.Option,
 ) (*atomic.UnsignedExportTx, error) {
 	var (
-		avaxAssetID     = b.context.AVAXAssetID
+		volrexAssetID   = b.context.VOLREXAssetID
 		exportedOutputs = make([]*avax.TransferableOutput, len(outputs))
 		exportedAmount  uint64
 	)
 	for i, output := range outputs {
 		exportedOutputs[i] = &avax.TransferableOutput{
-			Asset: avax.Asset{ID: avaxAssetID},
+			Asset: avax.Asset{ID: volrexAssetID},
 			FxID:  secp256k1fx.ID,
 			Out:   output,
 		}
@@ -348,12 +348,12 @@ func (b *builder) NewExportTx(
 		// Since the asset is AVAX, we divide by the avaxConversionRate to
 		// convert back to the correct denomination of AVAX that can be
 		// exported.
-		avaxBalance := new(big.Int).Div(balance, avaxConversionRate).Uint64()
+		volrexBalance := new(big.Int).Div(balance, avaxConversionRate).Uint64()
 
 		// If the balance for [addr] is insufficient to cover the additional
 		// cost of adding an input to the transaction, skip adding the input
 		// altogether.
-		if avaxBalance <= additionalFee {
+		if volrexBalance <= additionalFee {
 			continue
 		}
 
@@ -370,11 +370,11 @@ func (b *builder) NewExportTx(
 			return nil, err
 		}
 
-		inputAmount := min(amountToConsume, avaxBalance)
+		inputAmount := min(amountToConsume, volrexBalance)
 		inputs = append(inputs, atomic.EVMInput{
 			Address: addr,
 			Amount:  inputAmount,
-			AssetID: avaxAssetID,
+			AssetID: volrexAssetID,
 			Nonce:   nonce,
 		})
 		amountToConsume -= inputAmount
@@ -401,9 +401,9 @@ func getSpendableAmount(
 	utxo *avax.UTXO,
 	addrs set.Set[ids.ShortID],
 	minIssuanceTime uint64,
-	avaxAssetID ids.ID,
+	volrexAssetID ids.ID,
 ) (uint64, []uint32, bool) {
-	if utxo.Asset.ID != avaxAssetID {
+	if utxo.Asset.ID != volrexAssetID {
 		// Only AVAX can be imported
 		return 0, nil, false
 	}

@@ -13,11 +13,11 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/ava-labs/avalanchego/node"
-	"github.com/ava-labs/avalanchego/utils"
 	"github.com/ava-labs/avalanchego/utils/logging"
-	"github.com/ava-labs/avalanchego/utils/perms"
-	"github.com/ava-labs/avalanchego/utils/ulimit"
+	"github.com/devdotloop/volrex/node"
+	"github.com/devdotloop/volrex/utils"
+	"github.com/devdotloop/volrex/utils/perms"
+	"github.com/devdotloop/volrex/utils/ulimit"
 
 	nodeconfig "github.com/ava-labs/avalanchego/config/node"
 )

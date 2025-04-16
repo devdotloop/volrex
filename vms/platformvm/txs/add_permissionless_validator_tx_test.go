@@ -46,7 +46,7 @@ func TestAddPermissionlessPrimaryValidator(t *testing.T) {
 	pop, err := signer.NewProofOfPossession(sk)
 	require.NoError(err)
 
-	avaxAssetID, err := ids.FromString("FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z")
+	volrexAssetID, err := ids.FromString("FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z")
 	require.NoError(err)
 
 	customAssetID := ids.ID{
@@ -81,10 +81,10 @@ func TestAddPermissionlessPrimaryValidator(t *testing.T) {
 							OutputIndex: 1,
 						},
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						In: &secp256k1fx.TransferInput{
-							Amt: 2 * units.KiloAvax,
+							Amt: 2 * units.KiloVolrex,
 							Input: secp256k1fx.Input{
 								SigIndices: []uint32{1},
 							},
@@ -98,17 +98,17 @@ func TestAddPermissionlessPrimaryValidator(t *testing.T) {
 			NodeID: nodeID,
 			Start:  12345,
 			End:    12345 + 200*24*60*60,
-			Wght:   2 * units.KiloAvax,
+			Wght:   2 * units.KiloVolrex,
 		},
 		Subnet: constants.PrimaryNetworkID,
 		Signer: pop,
 		StakeOuts: []*avax.TransferableOutput{
 			{
 				Asset: avax.Asset{
-					ID: avaxAssetID,
+					ID: volrexAssetID,
 				},
 				Out: &secp256k1fx.TransferOutput{
-					Amt: 2 * units.KiloAvax,
+					Amt: 2 * units.KiloVolrex,
 					OutputOwners: secp256k1fx.OutputOwners{
 						Locktime:  0,
 						Threshold: 1,
@@ -139,9 +139,9 @@ func TestAddPermissionlessPrimaryValidator(t *testing.T) {
 	avax.SortTransferableOutputs(simpleAddPrimaryTx.StakeOuts, Codec)
 	utils.Sort(simpleAddPrimaryTx.Ins)
 	require.NoError(simpleAddPrimaryTx.SyntacticVerify(&snow.Context{
-		NetworkID:   1,
-		ChainID:     constants.PlatformChainID,
-		AVAXAssetID: avaxAssetID,
+		NetworkID:     1,
+		ChainID:       constants.PlatformChainID,
+		VOLREXAssetID: volrexAssetID,
 	}))
 
 	expectedUnsignedSimpleAddPrimaryTxBytes := []byte{
@@ -281,7 +281,7 @@ func TestAddPermissionlessPrimaryValidator(t *testing.T) {
 				Outs: []*avax.TransferableOutput{
 					{
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						Out: &secp256k1fx.TransferOutput{
 							Amt: 1,
@@ -296,7 +296,7 @@ func TestAddPermissionlessPrimaryValidator(t *testing.T) {
 					},
 					{
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						Out: &stakeable.LockOut{
 							Locktime: 87654321,
@@ -336,10 +336,10 @@ func TestAddPermissionlessPrimaryValidator(t *testing.T) {
 							OutputIndex: 1,
 						},
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						In: &secp256k1fx.TransferInput{
-							Amt: units.MegaAvax,
+							Amt: units.MegaVolrex,
 							Input: secp256k1fx.Input{
 								SigIndices: []uint32{2, 5},
 							},
@@ -386,17 +386,17 @@ func TestAddPermissionlessPrimaryValidator(t *testing.T) {
 			NodeID: nodeID,
 			Start:  12345,
 			End:    12345 + 200*24*60*60,
-			Wght:   5 * units.KiloAvax,
+			Wght:   5 * units.KiloVolrex,
 		},
 		Subnet: constants.PrimaryNetworkID,
 		Signer: pop,
 		StakeOuts: []*avax.TransferableOutput{
 			{
 				Asset: avax.Asset{
-					ID: avaxAssetID,
+					ID: volrexAssetID,
 				},
 				Out: &secp256k1fx.TransferOutput{
-					Amt: 2 * units.KiloAvax,
+					Amt: 2 * units.KiloVolrex,
 					OutputOwners: secp256k1fx.OutputOwners{
 						Locktime:  0,
 						Threshold: 1,
@@ -408,12 +408,12 @@ func TestAddPermissionlessPrimaryValidator(t *testing.T) {
 			},
 			{
 				Asset: avax.Asset{
-					ID: avaxAssetID,
+					ID: volrexAssetID,
 				},
 				Out: &stakeable.LockOut{
 					Locktime: 987654321,
 					TransferableOut: &secp256k1fx.TransferOutput{
-						Amt: 3 * units.KiloAvax,
+						Amt: 3 * units.KiloVolrex,
 						OutputOwners: secp256k1fx.OutputOwners{
 							Locktime:  87654321,
 							Threshold: 0,
@@ -438,9 +438,9 @@ func TestAddPermissionlessPrimaryValidator(t *testing.T) {
 		DelegationShares: reward.PercentDenominator,
 	}
 	require.NoError(complexAddPrimaryTx.SyntacticVerify(&snow.Context{
-		NetworkID:   1,
-		ChainID:     constants.PlatformChainID,
-		AVAXAssetID: avaxAssetID,
+		NetworkID:     1,
+		ChainID:       constants.PlatformChainID,
+		VOLREXAssetID: volrexAssetID,
 	}))
 
 	expectedUnsignedComplexAddPrimaryTxBytes := []byte{
@@ -711,7 +711,7 @@ func TestAddPermissionlessSubnetValidator(t *testing.T) {
 		0x44, 0x55, 0x66, 0x77,
 	}
 
-	avaxAssetID, err := ids.FromString("FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z")
+	volrexAssetID, err := ids.FromString("FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z")
 	require.NoError(err)
 
 	customAssetID := ids.ID{
@@ -752,10 +752,10 @@ func TestAddPermissionlessSubnetValidator(t *testing.T) {
 							OutputIndex: 1,
 						},
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						In: &secp256k1fx.TransferInput{
-							Amt: units.MilliAvax,
+							Amt: units.MilliVolrex,
 							Input: secp256k1fx.Input{
 								SigIndices: []uint32{1},
 							},
@@ -825,9 +825,9 @@ func TestAddPermissionlessSubnetValidator(t *testing.T) {
 	avax.SortTransferableOutputs(simpleAddSubnetTx.StakeOuts, Codec)
 	utils.Sort(simpleAddSubnetTx.Ins)
 	require.NoError(simpleAddSubnetTx.SyntacticVerify(&snow.Context{
-		NetworkID:   1,
-		ChainID:     constants.PlatformChainID,
-		AVAXAssetID: avaxAssetID,
+		NetworkID:     1,
+		ChainID:       constants.PlatformChainID,
+		VOLREXAssetID: volrexAssetID,
 	}))
 
 	expectedUnsignedSimpleAddSubnetTxBytes := []byte{
@@ -861,7 +861,7 @@ func TestAddPermissionlessSubnetValidator(t *testing.T) {
 		0x25, 0x91, 0xb2, 0x30, 0x27, 0xa8, 0x7d, 0xff,
 		// secp256k1fx transfer input type ID
 		0x00, 0x00, 0x00, 0x05,
-		// Amount = 1 MilliAVAX
+		// Amount = 1 MilliVolrex
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x42, 0x40,
 		// Number of input signature indices
 		0x00, 0x00, 0x00, 0x01,
@@ -968,7 +968,7 @@ func TestAddPermissionlessSubnetValidator(t *testing.T) {
 				Outs: []*avax.TransferableOutput{
 					{
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						Out: &secp256k1fx.TransferOutput{
 							Amt: 1,
@@ -983,7 +983,7 @@ func TestAddPermissionlessSubnetValidator(t *testing.T) {
 					},
 					{
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						Out: &stakeable.LockOut{
 							Locktime: 87654321,
@@ -1023,10 +1023,10 @@ func TestAddPermissionlessSubnetValidator(t *testing.T) {
 							OutputIndex: 1,
 						},
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						In: &secp256k1fx.TransferInput{
-							Amt: units.MegaAvax,
+							Amt: units.MegaVolrex,
 							Input: secp256k1fx.Input{
 								SigIndices: []uint32{2, 5},
 							},
@@ -1125,9 +1125,9 @@ func TestAddPermissionlessSubnetValidator(t *testing.T) {
 		DelegationShares: reward.PercentDenominator,
 	}
 	require.NoError(complexAddSubnetTx.SyntacticVerify(&snow.Context{
-		NetworkID:   1,
-		ChainID:     constants.PlatformChainID,
-		AVAXAssetID: avaxAssetID,
+		NetworkID:     1,
+		ChainID:       constants.PlatformChainID,
+		VOLREXAssetID: volrexAssetID,
 	}))
 
 	expectedUnsignedComplexAddSubnetTxBytes := []byte{

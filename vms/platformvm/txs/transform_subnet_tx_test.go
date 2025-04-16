@@ -32,7 +32,7 @@ func TestTransformSubnetTxSerialization(t *testing.T) {
 		0x44, 0x55, 0x66, 0x77,
 	}
 
-	avaxAssetID, err := ids.FromString("FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z")
+	volrexAssetID, err := ids.FromString("FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z")
 	require.NoError(err)
 
 	customAssetID := ids.ID{
@@ -68,10 +68,10 @@ func TestTransformSubnetTxSerialization(t *testing.T) {
 							OutputIndex: 1,
 						},
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						In: &secp256k1fx.TransferInput{
-							Amt: 10 * units.Avax,
+							Amt: 10 * units.Volrex,
 							Input: secp256k1fx.Input{
 								SigIndices: []uint32{5},
 							},
@@ -115,9 +115,9 @@ func TestTransformSubnetTxSerialization(t *testing.T) {
 		},
 	}
 	require.NoError(simpleTransformTx.SyntacticVerify(&snow.Context{
-		NetworkID:   1,
-		ChainID:     constants.PlatformChainID,
-		AVAXAssetID: avaxAssetID,
+		NetworkID:     1,
+		ChainID:       constants.PlatformChainID,
+		VOLREXAssetID: volrexAssetID,
 	}))
 
 	expectedUnsignedSimpleTransformTxBytes := []byte{
@@ -234,7 +234,7 @@ func TestTransformSubnetTxSerialization(t *testing.T) {
 				Outs: []*avax.TransferableOutput{
 					{
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						Out: &stakeable.LockOut{
 							Locktime: 87654321,
@@ -274,10 +274,10 @@ func TestTransformSubnetTxSerialization(t *testing.T) {
 							OutputIndex: 1,
 						},
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						In: &secp256k1fx.TransferInput{
-							Amt: units.KiloAvax,
+							Amt: units.KiloVolrex,
 							Input: secp256k1fx.Input{
 								SigIndices: []uint32{2, 5},
 							},
@@ -341,9 +341,9 @@ func TestTransformSubnetTxSerialization(t *testing.T) {
 	avax.SortTransferableOutputs(complexTransformTx.Outs, Codec)
 	utils.Sort(complexTransformTx.Ins)
 	require.NoError(complexTransformTx.SyntacticVerify(&snow.Context{
-		NetworkID:   1,
-		ChainID:     constants.PlatformChainID,
-		AVAXAssetID: avaxAssetID,
+		NetworkID:     1,
+		ChainID:       constants.PlatformChainID,
+		VOLREXAssetID: volrexAssetID,
 	}))
 
 	expectedUnsignedComplexTransformTxBytes := []byte{
@@ -527,10 +527,10 @@ func TestTransformSubnetTxSerialization(t *testing.T) {
 	require.NoError(aliaser.Alias(constants.PlatformChainID, "P"))
 
 	unsignedComplexTransformTx.InitCtx(&snow.Context{
-		NetworkID:   1,
-		ChainID:     constants.PlatformChainID,
-		AVAXAssetID: avaxAssetID,
-		BCLookup:    aliaser,
+		NetworkID:     1,
+		ChainID:       constants.PlatformChainID,
+		VOLREXAssetID: volrexAssetID,
+		BCLookup:      aliaser,
 	})
 
 	unsignedComplexTransformTxJSONBytes, err := json.MarshalIndent(unsignedComplexTransformTx, "", "\t")
@@ -642,9 +642,9 @@ func TestTransformSubnetTxSyntacticVerify(t *testing.T) {
 	)
 
 	ctx := &snow.Context{
-		ChainID:     chainID,
-		NetworkID:   networkID,
-		AVAXAssetID: ids.GenerateTestID(),
+		ChainID:       chainID,
+		NetworkID:     networkID,
+		VOLREXAssetID: ids.GenerateTestID(),
 	}
 
 	// A BaseTx that already passed syntactic verification.
@@ -707,7 +707,7 @@ func TestTransformSubnetTxSyntacticVerify(t *testing.T) {
 				return &TransformSubnetTx{
 					BaseTx:  validBaseTx,
 					Subnet:  ids.GenerateTestID(),
-					AssetID: ctx.AVAXAssetID,
+					AssetID: ctx.VOLREXAssetID,
 				}
 			},
 			err: errAssetIDCantBeAVAX,

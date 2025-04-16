@@ -206,7 +206,7 @@ type ManagerConfig struct {
 	PartialSyncPrimaryNetwork bool
 	Server                    server.Server // Handles HTTP API calls
 	AtomicMemory              *atomic.Memory
-	AVAXAssetID               ids.ID
+	VOLREXAssetID             ids.ID
 	XChainID                  ids.ID          // ID of the X-Chain,
 	CChainID                  ids.ID          // ID of the C-Chain,
 	CriticalChains            set.Set[ids.ID] // Chains that can't exit gracefully
@@ -499,9 +499,9 @@ func (m *manager) buildChain(chainParams ChainParameters, sb subnets.Subnet) (*c
 			PublicKey:       m.StakingBLSKey.PublicKey(),
 			NetworkUpgrades: m.Upgrades,
 
-			XChainID:    m.XChainID,
-			CChainID:    m.CChainID,
-			AVAXAssetID: m.AVAXAssetID,
+			XChainID:      m.XChainID,
+			CChainID:      m.CChainID,
+			VOLREXAssetID: m.VOLREXAssetID,
 
 			Log:          chainLog,
 			SharedMemory: m.AtomicMemory.NewSharedMemory(chainParams.ID),

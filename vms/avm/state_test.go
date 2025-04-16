@@ -57,7 +57,7 @@ func TestSetsAndGets(t *testing.T) {
 			},
 			Asset: avax.Asset{ID: assetID},
 			In: &secp256k1fx.TransferInput{
-				Amt: 20 * units.KiloAvax,
+				Amt: 20 * units.KiloVolrex,
 				Input: secp256k1fx.Input{
 					SigIndices: []uint32{
 						0,

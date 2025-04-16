@@ -355,7 +355,7 @@ func TestCreateAssetTxSerializationAgain(t *testing.T) {
 		unsignedTx.Outs = append(unsignedTx.Outs, &avax.TransferableOutput{
 			Asset: avax.Asset{ID: assetID},
 			Out: &secp256k1fx.TransferOutput{
-				Amt: 20 * units.KiloAvax,
+				Amt: 20 * units.KiloVolrex,
 				OutputOwners: secp256k1fx.OutputOwners{
 					Threshold: 1,
 					Addrs:     []ids.ShortID{addr},

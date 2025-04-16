@@ -49,7 +49,7 @@ func TestConvertSubnetToL1TxSerialization(t *testing.T) {
 			0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb,
 			0x44, 0x55, 0x66, 0x77,
 		}
-		avaxAssetID = ids.ID{
+		volrexAssetID = ids.ID{
 			0x21, 0xe6, 0x73, 0x17, 0xcb, 0xc4, 0xbe, 0x2a,
 			0xeb, 0x00, 0x67, 0x7a, 0xd6, 0x46, 0x27, 0x78,
 			0xa8, 0xf5, 0x22, 0x74, 0xb9, 0xd6, 0x05, 0xdf,
@@ -112,10 +112,10 @@ func TestConvertSubnetToL1TxSerialization(t *testing.T) {
 									OutputIndex: 1,
 								},
 								Asset: avax.Asset{
-									ID: avaxAssetID,
+									ID: volrexAssetID,
 								},
 								In: &secp256k1fx.TransferInput{
-									Amt: units.MilliAvax,
+									Amt: units.MilliVolrex,
 									Input: secp256k1fx.Input{
 										SigIndices: []uint32{5},
 									},
@@ -164,7 +164,7 @@ func TestConvertSubnetToL1TxSerialization(t *testing.T) {
 				0x25, 0x91, 0xb2, 0x30, 0x27, 0xa8, 0x7d, 0xff,
 				// secp256k1fx transfer input type ID
 				0x00, 0x00, 0x00, 0x05,
-				// input amount = 1 MilliAvax
+				// input amount = 1 MilliVolrex
 				0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x42, 0x40,
 				// number of signatures needed in input
 				0x00, 0x00, 0x00, 0x01,
@@ -209,7 +209,7 @@ func TestConvertSubnetToL1TxSerialization(t *testing.T) {
 						Outs: []*avax.TransferableOutput{
 							{
 								Asset: avax.Asset{
-									ID: avaxAssetID,
+									ID: volrexAssetID,
 								},
 								Out: &stakeable.LockOut{
 									Locktime: 87654321,
@@ -249,10 +249,10 @@ func TestConvertSubnetToL1TxSerialization(t *testing.T) {
 									OutputIndex: 1,
 								},
 								Asset: avax.Asset{
-									ID: avaxAssetID,
+									ID: volrexAssetID,
 								},
 								In: &secp256k1fx.TransferInput{
-									Amt: units.Avax,
+									Amt: units.Volrex,
 									Input: secp256k1fx.Input{
 										SigIndices: []uint32{2, 5},
 									},
@@ -302,7 +302,7 @@ func TestConvertSubnetToL1TxSerialization(t *testing.T) {
 					{
 						NodeID:  nodeID[:],
 						Weight:  0x0102030405060708,
-						Balance: units.Avax,
+						Balance: units.Volrex,
 						Signer:  *pop,
 						RemainingBalanceOwner: message.PChainOwner{
 							Threshold: 1,

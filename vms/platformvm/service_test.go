@@ -159,7 +159,7 @@ func TestGetTxStatus(t *testing.T) {
 			TxID:        ids.GenerateTestID(),
 			OutputIndex: uint32(randSrc.Int63()),
 		},
-		Asset: avax.Asset{ID: service.vm.ctx.AVAXAssetID},
+		Asset: avax.Asset{ID: service.vm.ctx.VOLREXAssetID},
 		Out: &secp256k1fx.TransferOutput{
 			Amt: 1234567,
 			OutputOwners: secp256k1fx.OutputOwners{
@@ -284,7 +284,7 @@ func TestGetTx(t *testing.T) {
 						Subnet: constants.PrimaryNetworkID,
 					},
 					pop,
-					s.vm.ctx.AVAXAssetID,
+					s.vm.ctx.VOLREXAssetID,
 					rewardsOwner,
 					rewardsOwner,
 					0,
@@ -302,7 +302,7 @@ func TestGetTx(t *testing.T) {
 				tx, err := wallet.IssueExportTx(
 					s.vm.ctx.XChainID,
 					[]*avax.TransferableOutput{{
-						Asset: avax.Asset{ID: s.vm.ctx.AVAXAssetID},
+						Asset: avax.Asset{ID: s.vm.ctx.VOLREXAssetID},
 						Out: &secp256k1fx.TransferOutput{
 							Amt: 100,
 							OutputOwners: secp256k1fx.OutputOwners{
@@ -468,7 +468,7 @@ func TestGetStake(t *testing.T) {
 		require.Equal(
 			avax.TransferableOutput{
 				Asset: avax.Asset{
-					ID: service.vm.ctx.AVAXAssetID,
+					ID: service.vm.ctx.VOLREXAssetID,
 				},
 				Out: &secp256k1fx.TransferOutput{
 					Amt: genesistest.DefaultValidatorWeight,
@@ -818,7 +818,7 @@ func TestGetValidatorsAt(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop,
-		service.vm.ctx.AVAXAssetID,
+		service.vm.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		0,

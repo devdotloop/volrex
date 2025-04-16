@@ -70,7 +70,7 @@ func TestApricotProposalBlockTimeVerification(t *testing.T) {
 		StakeOuts: []*avax.TransferableOutput{
 			{
 				Asset: avax.Asset{
-					ID: env.ctx.AVAXAssetID,
+					ID: env.ctx.VOLREXAssetID,
 				},
 				Out: &secp256k1fx.TransferOutput{
 					Amt: 1,
@@ -192,7 +192,7 @@ func TestBanffProposalBlockTimeVerification(t *testing.T) {
 		StakeOuts: []*avax.TransferableOutput{
 			{
 				Asset: avax.Asset{
-					ID: env.ctx.AVAXAssetID,
+					ID: env.ctx.VOLREXAssetID,
 				},
 				Out: &secp256k1fx.TransferOutput{
 					Amt: 1,
@@ -1350,7 +1350,7 @@ func TestAddValidatorProposalBlock(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop,
-		env.ctx.AVAXAssetID,
+		env.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		10000,
@@ -1432,7 +1432,7 @@ func TestAddValidatorProposalBlock(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop,
-		env.ctx.AVAXAssetID,
+		env.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		10000,

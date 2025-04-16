@@ -34,7 +34,7 @@ func NewContextFromClients(
 		return nil, err
 	}
 
-	avaxAssetID, err := chainClient.GetStakingAssetID(ctx, constants.PrimaryNetworkID)
+	volrexAssetID, err := chainClient.GetStakingAssetID(ctx, constants.PrimaryNetworkID)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func NewContextFromClients(
 
 	return &builder.Context{
 		NetworkID:         networkID,
-		AVAXAssetID:       avaxAssetID,
+		VOLREXAssetID:     volrexAssetID,
 		ComplexityWeights: dynamicFeeConfig.Weights,
 		GasPrice:          gasPriceMultiplier * gasPrice,
 	}, nil

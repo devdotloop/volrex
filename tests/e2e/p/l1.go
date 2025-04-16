@@ -51,7 +51,7 @@ import (
 
 const (
 	genesisWeight   = units.Schmeckle
-	genesisBalance  = units.Avax
+	genesisBalance  = units.Volrex
 	registerWeight  = genesisWeight / 10
 	updatedWeight   = 2 * registerWeight
 	registerBalance = 0
@@ -660,7 +660,7 @@ var _ = e2e.DescribePChain("[L1]", func() {
 		tc.By("issuing an IncreaseL1ValidatorBalanceTx", func() {
 			_, err := pWallet.IssueIncreaseL1ValidatorBalanceTx(
 				registerValidationID,
-				units.Avax,
+				units.Volrex,
 			)
 			require.NoError(err)
 		})

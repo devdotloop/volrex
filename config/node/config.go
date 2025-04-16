@@ -134,8 +134,8 @@ type Config struct {
 	UpgradeConfig upgrade.Config `json:"upgradeConfig"`
 
 	// Genesis information
-	GenesisBytes []byte `json:"-"`
-	AvaxAssetID  ids.ID `json:"avaxAssetID"`
+	GenesisBytes  []byte `json:"-"`
+	VolrexAssetID ids.ID `json:"volrexAssetID"`
 
 	// ID of the network this node should connect to
 	NetworkID uint32 `json:"networkID"`

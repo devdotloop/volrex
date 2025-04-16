@@ -34,7 +34,7 @@ func TestSetL1ValidatorWeightTxSerialization(t *testing.T) {
 			0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb,
 			0x44, 0x55, 0x66, 0x77,
 		}
-		avaxAssetID = ids.ID{
+		volrexAssetID = ids.ID{
 			0x21, 0xe6, 0x73, 0x17, 0xcb, 0xc4, 0xbe, 0x2a,
 			0xeb, 0x00, 0x67, 0x7a, 0xd6, 0x46, 0x27, 0x78,
 			0xa8, 0xf5, 0x22, 0x74, 0xb9, 0xd6, 0x05, 0xdf,
@@ -62,7 +62,7 @@ func TestSetL1ValidatorWeightTxSerialization(t *testing.T) {
 				Outs: []*avax.TransferableOutput{
 					{
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						Out: &stakeable.LockOut{
 							Locktime: 87654321,
@@ -102,10 +102,10 @@ func TestSetL1ValidatorWeightTxSerialization(t *testing.T) {
 							OutputIndex: 1,
 						},
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						In: &secp256k1fx.TransferInput{
-							Amt: units.Avax,
+							Amt: units.Volrex,
 							Input: secp256k1fx.Input{
 								SigIndices: []uint32{2, 5},
 							},

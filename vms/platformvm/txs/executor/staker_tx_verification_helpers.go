@@ -30,7 +30,7 @@ func getValidatorRules(
 ) (*addValidatorRules, error) {
 	if subnetID == constants.PrimaryNetworkID {
 		return &addValidatorRules{
-			assetID:           backend.Ctx.AVAXAssetID,
+			assetID:           backend.Ctx.VOLREXAssetID,
 			minValidatorStake: backend.Config.MinValidatorStake,
 			maxValidatorStake: backend.Config.MaxValidatorStake,
 			minStakeDuration:  backend.Config.MinStakeDuration,
@@ -70,7 +70,7 @@ func getDelegatorRules(
 ) (*addDelegatorRules, error) {
 	if subnetID == constants.PrimaryNetworkID {
 		return &addDelegatorRules{
-			assetID:                  backend.Ctx.AVAXAssetID,
+			assetID:                  backend.Ctx.VOLREXAssetID,
 			minDelegatorStake:        backend.Config.MinDelegatorStake,
 			maxValidatorStake:        backend.Config.MaxValidatorStake,
 			minStakeDuration:         backend.Config.MinStakeDuration,

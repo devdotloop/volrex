@@ -122,7 +122,7 @@ func (tx *TransformSubnetTx) SyntacticVerify(ctx *snow.Context) error {
 		return errCantTransformPrimaryNetwork
 	case tx.AssetID == ids.Empty:
 		return errEmptyAssetID
-	case tx.AssetID == ctx.AVAXAssetID:
+	case tx.AssetID == ctx.VOLREXAssetID:
 		return errAssetIDCantBeAVAX
 	case tx.InitialSupply == 0:
 		return errInitialSupplyZero

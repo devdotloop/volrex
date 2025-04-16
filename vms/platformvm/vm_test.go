@@ -75,7 +75,7 @@ import (
 )
 
 const (
-	defaultMinDelegatorStake = 1 * units.MilliAvax
+	defaultMinDelegatorStake = 1 * units.MilliVolrex
 	defaultMinValidatorStake = 5 * defaultMinDelegatorStake
 	defaultMaxValidatorStake = 100 * defaultMinValidatorStake
 
@@ -88,7 +88,7 @@ var (
 		MaxConsumptionRate: .12 * reward.PercentDenominator,
 		MinConsumptionRate: .10 * reward.PercentDenominator,
 		MintingPeriod:      365 * 24 * time.Hour,
-		SupplyCap:          720 * units.MegaAvax,
+		SupplyCap:          720 * units.MegaVolrex,
 	}
 
 	latestForkTime = genesistest.DefaultValidatorStartTime.Add(time.Second)
@@ -336,7 +336,7 @@ func TestAddValidatorCommit(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop,
-		vm.ctx.AVAXAssetID,
+		vm.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		reward.PercentDenominator,
@@ -500,7 +500,7 @@ func TestAddValidatorInvalidNotReissued(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop,
-		vm.ctx.AVAXAssetID,
+		vm.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		reward.PercentDenominator,
@@ -920,9 +920,9 @@ func TestAtomicImport(t *testing.T) {
 	}
 	utxo := &avax.UTXO{
 		UTXOID: utxoID,
-		Asset:  avax.Asset{ID: vm.ctx.AVAXAssetID},
+		Asset:  avax.Asset{ID: vm.ctx.VOLREXAssetID},
 		Out: &secp256k1fx.TransferOutput{
-			Amt:          50 * units.MicroAvax,
+			Amt:          50 * units.MicroVolrex,
 			OutputOwners: *importOwners,
 		},
 	}
@@ -984,7 +984,7 @@ func TestOptimisticAtomicImport(t *testing.T) {
 				TxID:        ids.Empty.Prefix(1),
 				OutputIndex: 1,
 			},
-			Asset: avax.Asset{ID: vm.ctx.AVAXAssetID},
+			Asset: avax.Asset{ID: vm.ctx.VOLREXAssetID},
 			In: &secp256k1fx.TransferInput{
 				Amt: 50000,
 			},
@@ -1080,7 +1080,7 @@ func TestRestartFullyAccepted(t *testing.T) {
 				TxID:        ids.Empty.Prefix(1),
 				OutputIndex: 1,
 			},
-			Asset: avax.Asset{ID: firstVM.ctx.AVAXAssetID},
+			Asset: avax.Asset{ID: firstVM.ctx.VOLREXAssetID},
 			In: &secp256k1fx.TransferInput{
 				Amt: 50000,
 			},
@@ -1206,7 +1206,7 @@ func TestBootstrapPartiallyAccepted(t *testing.T) {
 				TxID:        ids.Empty.Prefix(1),
 				OutputIndex: 1,
 			},
-			Asset: avax.Asset{ID: vm.ctx.AVAXAssetID},
+			Asset: avax.Asset{ID: vm.ctx.VOLREXAssetID},
 			In: &secp256k1fx.TransferInput{
 				Amt: 50000,
 			},
@@ -1550,7 +1550,7 @@ func TestUnverifiedParent(t *testing.T) {
 				TxID:        ids.Empty.Prefix(1),
 				OutputIndex: 1,
 			},
-			Asset: avax.Asset{ID: vm.ctx.AVAXAssetID},
+			Asset: avax.Asset{ID: vm.ctx.VOLREXAssetID},
 			In: &secp256k1fx.TransferInput{
 				Amt: 50000,
 			},
@@ -1587,7 +1587,7 @@ func TestUnverifiedParent(t *testing.T) {
 				TxID:        ids.Empty.Prefix(2),
 				OutputIndex: 2,
 			},
-			Asset: avax.Asset{ID: vm.ctx.AVAXAssetID},
+			Asset: avax.Asset{ID: vm.ctx.VOLREXAssetID},
 			In: &secp256k1fx.TransferInput{
 				Amt: 50000,
 			},
@@ -1934,7 +1934,7 @@ func TestRemovePermissionedValidatorDuringAddPending(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop,
-		vm.ctx.AVAXAssetID,
+		vm.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		reward.PercentDenominator,
@@ -2062,9 +2062,9 @@ func TestBaseTx(t *testing.T) {
 	baseTx, err := wallet.IssueBaseTx(
 		[]*avax.TransferableOutput{
 			{
-				Asset: avax.Asset{ID: vm.ctx.AVAXAssetID},
+				Asset: avax.Asset{ID: vm.ctx.VOLREXAssetID},
 				Out: &secp256k1fx.TransferOutput{
-					Amt: 100 * units.MicroAvax,
+					Amt: 100 * units.MicroVolrex,
 					OutputOwners: secp256k1fx.OutputOwners{
 						Threshold: 1,
 						Addrs: []ids.ShortID{
@@ -2099,9 +2099,9 @@ func TestPruneMempool(t *testing.T) {
 	baseTx, err := wallet.IssueBaseTx(
 		[]*avax.TransferableOutput{
 			{
-				Asset: avax.Asset{ID: vm.ctx.AVAXAssetID},
+				Asset: avax.Asset{ID: vm.ctx.VOLREXAssetID},
 				Out: &secp256k1fx.TransferOutput{
-					Amt: 100 * units.MicroAvax,
+					Amt: 100 * units.MicroVolrex,
 					OutputOwners: secp256k1fx.OutputOwners{
 						Threshold: 1,
 						Addrs: []ids.ShortID{
@@ -2152,7 +2152,7 @@ func TestPruneMempool(t *testing.T) {
 			Subnet: constants.PrimaryNetworkID,
 		},
 		pop,
-		vm.ctx.AVAXAssetID,
+		vm.ctx.VOLREXAssetID,
 		rewardsOwner,
 		rewardsOwner,
 		20000,

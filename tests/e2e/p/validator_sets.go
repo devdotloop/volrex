@@ -37,13 +37,13 @@ var _ = e2e.DescribePChain("[Validator Sets]", func() {
 
 		tc.By("creating wallet with a funded key to source delegated funds from")
 		var (
-			keychain    = env.NewKeychain()
-			nodeURI     = env.GetRandomNodeURI()
-			baseWallet  = e2e.NewWallet(tc, keychain, nodeURI)
-			pWallet     = baseWallet.P()
-			pBuilder    = pWallet.Builder()
-			pContext    = pBuilder.Context()
-			avaxAssetID = pContext.AVAXAssetID
+			keychain      = env.NewKeychain()
+			nodeURI       = env.GetRandomNodeURI()
+			baseWallet    = e2e.NewWallet(tc, keychain, nodeURI)
+			pWallet       = baseWallet.P()
+			pBuilder      = pWallet.Builder()
+			pContext      = pBuilder.Context()
+			volrexAssetID = pContext.VOLREXAssetID
 		)
 
 		const delegatorCount = 15
@@ -65,7 +65,7 @@ var _ = e2e.DescribePChain("[Validator Sets]", func() {
 						},
 						Subnet: constants.PrimaryNetworkID,
 					},
-					avaxAssetID,
+					volrexAssetID,
 					&secp256k1fx.OutputOwners{
 						Threshold: 1,
 						Addrs:     []ids.ShortID{rewardKey.Address()},

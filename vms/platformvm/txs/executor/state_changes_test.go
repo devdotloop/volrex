@@ -251,9 +251,9 @@ func TestAdvanceTimeTo_UpdateL1Validators(t *testing.T) {
 				EndAccumulatedFee: endAccumulatedFee,
 			}
 		}
-		l1ValidatorToEvict0 = newL1Validator(3 * units.NanoAvax) // lasts 3 seconds
-		l1ValidatorToEvict1 = newL1Validator(3 * units.NanoAvax) // lasts 3 seconds
-		l1ValidatorToKeep   = newL1Validator(units.Avax)
+		l1ValidatorToEvict0 = newL1Validator(3 * units.NanoVolrex) // lasts 3 seconds
+		l1ValidatorToEvict1 = newL1Validator(3 * units.NanoVolrex) // lasts 3 seconds
+		l1ValidatorToKeep   = newL1Validator(units.Volrex)
 
 		currentTime = genesistest.DefaultValidatorStartTime
 		newTime     = currentTime.Add(timeToAdvance)

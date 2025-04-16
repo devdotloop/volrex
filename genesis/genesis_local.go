@@ -39,8 +39,8 @@ var (
 	// LocalParams are the params used for local networks
 	LocalParams = Params{
 		TxFeeConfig: TxFeeConfig{
-			CreateAssetTxFee: units.MilliAvax,
-			TxFee:            units.MilliAvax,
+			CreateAssetTxFee: units.MilliVolrex,
+			TxFee:            units.MilliVolrex,
 			DynamicFeeConfig: gas.Config{
 				Weights: gas.Dimensions{
 					gas.Bandwidth: 1,     // Max block size ~1MB
@@ -61,7 +61,7 @@ var (
 			ValidatorFeeConfig: fee.Config{
 				Capacity: 20_000,
 				Target:   10_000,
-				MinPrice: gas.Price(1 * units.NanoAvax),
+				MinPrice: gas.Price(1 * units.NanoVolrex),
 				// ExcessConversionConstant = (Capacity - Target) * NumberOfSecondsPerDoubling / ln(2)
 				//
 				// ln(2) is a float and the result is consensus critical, so we
@@ -71,9 +71,9 @@ var (
 		},
 		StakingConfig: StakingConfig{
 			UptimeRequirement: .8, // 80%
-			MinValidatorStake: 2 * units.KiloAvax,
-			MaxValidatorStake: 3 * units.MegaAvax,
-			MinDelegatorStake: 25 * units.Avax,
+			MinValidatorStake: 2 * units.KiloVolrex,
+			MaxValidatorStake: 3 * units.MegaVolrex,
+			MinDelegatorStake: 25 * units.Volrex,
 			MinDelegationFee:  20000, // 2%
 			MinStakeDuration:  24 * time.Hour,
 			MaxStakeDuration:  365 * 24 * time.Hour,
@@ -81,7 +81,7 @@ var (
 				MaxConsumptionRate: .12 * reward.PercentDenominator,
 				MinConsumptionRate: .10 * reward.PercentDenominator,
 				MintingPeriod:      365 * 24 * time.Hour,
-				SupplyCap:          720 * units.MegaAvax,
+				SupplyCap:          720 * units.MegaVolrex,
 			},
 		},
 	}

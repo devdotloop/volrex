@@ -23,7 +23,7 @@ var _ = e2e.DescribeCChain("[Interchain Workflow]", func() {
 	tc := e2e.NewTestContext()
 	require := require.New(tc)
 
-	const txAmount = 10 * units.Avax // Arbitrary amount to send and transfer
+	const txAmount = 10 * units.Volrex // Arbitrary amount to send and transfer
 
 	ginkgo.It("should ensure that funds can be transferred from the C-Chain to the X-Chain and the P-Chain", func() {
 		env := e2e.GetEnv(tc)
@@ -90,7 +90,7 @@ var _ = e2e.DescribeCChain("[Interchain Workflow]", func() {
 		xContext := xBuilder.Context()
 		cBuilder := cWallet.Builder()
 		cContext := cBuilder.Context()
-		avaxAssetID := xContext.AVAXAssetID
+		volrexAssetID := xContext.VOLREXAssetID
 		// Use the same owner for import funds to X-Chain and P-Chain
 		recipientOwner := secp256k1fx.OutputOwners{
 			Threshold: 1,
@@ -135,7 +135,7 @@ var _ = e2e.DescribeCChain("[Interchain Workflow]", func() {
 				recipientKey.Address(),
 			)))
 			require.NoError(err)
-			require.Positive(balances[avaxAssetID])
+			require.Positive(balances[volrexAssetID])
 		})
 
 		tc.By("exporting AVAX from the C-Chain to the P-Chain", func() {
@@ -162,7 +162,7 @@ var _ = e2e.DescribeCChain("[Interchain Workflow]", func() {
 				recipientKey.Address(),
 			)))
 			require.NoError(err)
-			require.Positive(balances[avaxAssetID])
+			require.Positive(balances[volrexAssetID])
 		})
 
 		_ = e2e.CheckBootstrapIsPossible(tc, env.GetNetwork())

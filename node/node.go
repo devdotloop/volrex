@@ -245,7 +245,7 @@ func New(
 	if err := n.addDefaultVMAliases(); err != nil {
 		return nil, fmt.Errorf("couldn't initialize API aliases: %w", err)
 	}
-	if err := n.initChainManager(n.Config.AvaxAssetID); err != nil { // Set up the chain manager
+	if err := n.initChainManager(n.Config.VolrexAssetID); err != nil { // Set up the chain manager
 		return nil, fmt.Errorf("couldn't initialize chain manager: %w", err)
 	}
 	if err := n.initVMs(); err != nil { // Initialize the VM registry.
@@ -1061,7 +1061,7 @@ func (n *Node) addDefaultVMAliases() error {
 // Create the chainManager and register the following VMs:
 // AVM, Simple Payments DAG, Simple Payments Chain, and Platform VM
 // Assumes n.DBManager, n.vdrs all initialized (non-nil)
-func (n *Node) initChainManager(avaxAssetID ids.ID) error {
+func (n *Node) initChainManager(volrexAssetID ids.ID) error {
 	createAVMTx, err := genesis.VMGenesis(n.Config.GenesisBytes, constants.AVMID)
 	if err != nil {
 		return err
@@ -1152,7 +1152,7 @@ func (n *Node) initChainManager(avaxAssetID ids.ID) error {
 			NetworkID:                               n.Config.NetworkID,
 			Server:                                  n.APIServer,
 			AtomicMemory:                            n.sharedMemory,
-			AVAXAssetID:                             avaxAssetID,
+			VOLREXAssetID:                           volrexAssetID,
 			XChainID:                                xChainID,
 			CChainID:                                cChainID,
 			CriticalChains:                          criticalChains,

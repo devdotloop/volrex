@@ -146,7 +146,7 @@ func TestBanffStandardBlockTimeVerification(t *testing.T) {
 			TxID: txID,
 		},
 		Asset: avax.Asset{
-			ID: snowtest.AVAXAssetID,
+			ID: snowtest.VOLREXAssetID,
 		},
 		Out: &secp256k1fx.TransferOutput{
 			Amt: 1,

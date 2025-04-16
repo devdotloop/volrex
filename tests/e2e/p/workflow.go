@@ -39,7 +39,7 @@ var _ = e2e.DescribePChain("[Workflow]", func() {
 	ginkgo.It("P-chain main operations", func() {
 		const (
 			// amount to transfer from P to X chain
-			toTransfer                 = 1 * units.Avax
+			toTransfer                 = 1 * units.Volrex
 			delegationFeeShares uint32 = 20000 // TODO: retrieve programmatically
 		)
 
@@ -85,7 +85,7 @@ var _ = e2e.DescribePChain("[Workflow]", func() {
 			xBuilder = xWallet.Builder()
 			xContext = xBuilder.Context()
 
-			avaxAssetID = pContext.AVAXAssetID
+			volrexAssetID = pContext.VOLREXAssetID
 		)
 
 		tc.Log().Info("fetching minimal stake amounts")
@@ -123,7 +123,7 @@ var _ = e2e.DescribePChain("[Workflow]", func() {
 			_, err = pWallet.IssueAddPermissionlessValidatorTx(
 				vdr,
 				pop,
-				avaxAssetID,
+				volrexAssetID,
 				rewardOwner,
 				rewardOwner,
 				delegationFeeShares,
@@ -136,7 +136,7 @@ var _ = e2e.DescribePChain("[Workflow]", func() {
 		tc.By("issuing an AddPermissionlessDelegatorTx", func() {
 			_, err := pWallet.IssueAddPermissionlessDelegatorTx(
 				vdr,
-				avaxAssetID,
+				volrexAssetID,
 				rewardOwner,
 				tc.WithDefaultContext(),
 				changeOwner,
@@ -148,9 +148,9 @@ var _ = e2e.DescribePChain("[Workflow]", func() {
 			balances, err := pBuilder.GetBalance()
 			require.NoError(err)
 
-			initialAVAXBalance := balances[avaxAssetID]
+			initialvolrexBalance := balances[volrexAssetID]
 			tc.Log().Info("retrieved P-chain balance before P->X export",
-				zap.Uint64("balance", initialAVAXBalance),
+				zap.Uint64("balance", initialvolrexBalance),
 			)
 
 			exportTx, err := pWallet.IssueExportTx(
@@ -158,7 +158,7 @@ var _ = e2e.DescribePChain("[Workflow]", func() {
 				[]*avax.TransferableOutput{
 					{
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						Out: &secp256k1fx.TransferOutput{
 							Amt:          toTransfer,
@@ -177,21 +177,21 @@ var _ = e2e.DescribePChain("[Workflow]", func() {
 			balances, err = pBuilder.GetBalance()
 			require.NoError(err)
 
-			finalAVAXBalance := balances[avaxAssetID]
+			finalvolrexBalance := balances[volrexAssetID]
 			tc.Log().Info("retrieved P-chain balance after P->X export",
-				zap.Uint64("balance", finalAVAXBalance),
+				zap.Uint64("balance", finalvolrexBalance),
 			)
 
-			require.Equal(initialAVAXBalance-toTransfer-exportFee, finalAVAXBalance)
+			require.Equal(initialvolrexBalance-toTransfer-exportFee, finalvolrexBalance)
 		})
 
 		tc.By("issuing an ImportTx on the X-Chain", func() {
 			balances, err := xBuilder.GetFTBalance()
 			require.NoError(err)
 
-			initialAVAXBalance := balances[avaxAssetID]
+			initialvolrexBalance := balances[volrexAssetID]
 			tc.Log().Info("retrieved X-chain balance before P->X import",
-				zap.Uint64("balance", initialAVAXBalance),
+				zap.Uint64("balance", initialvolrexBalance),
 			)
 
 			_, err = xWallet.IssueImportTx(
@@ -205,12 +205,12 @@ var _ = e2e.DescribePChain("[Workflow]", func() {
 			balances, err = xBuilder.GetFTBalance()
 			require.NoError(err)
 
-			finalAVAXBalance := balances[avaxAssetID]
+			finalvolrexBalance := balances[volrexAssetID]
 			tc.Log().Info("retrieved X-chain balance after P->X import",
-				zap.Uint64("balance", finalAVAXBalance),
+				zap.Uint64("balance", finalvolrexBalance),
 			)
 
-			require.Equal(initialAVAXBalance+toTransfer-xContext.BaseTxFee, finalAVAXBalance)
+			require.Equal(initialvolrexBalance+toTransfer-xContext.BaseTxFee, finalvolrexBalance)
 		})
 
 		_ = e2e.CheckBootstrapIsPossible(tc, env.GetNetwork())

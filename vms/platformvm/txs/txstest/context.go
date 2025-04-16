@@ -17,8 +17,8 @@ func newContext(
 	state state.State,
 ) *builder.Context {
 	builderContext := &builder.Context{
-		NetworkID:   ctx.NetworkID,
-		AVAXAssetID: ctx.AVAXAssetID,
+		NetworkID:     ctx.NetworkID,
+		VOLREXAssetID: ctx.VOLREXAssetID,
 	}
 
 	builderContext.ComplexityWeights = config.DynamicFeeConfig.Weights

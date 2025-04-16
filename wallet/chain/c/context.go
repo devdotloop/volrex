@@ -17,9 +17,9 @@ import (
 const Alias = "C"
 
 type Context struct {
-	NetworkID    uint32
-	BlockchainID ids.ID
-	AVAXAssetID  ids.ID
+	NetworkID     uint32
+	BlockchainID  ids.ID
+	VOLREXAssetID ids.ID
 }
 
 func NewContextFromURI(ctx context.Context, uri string) (*Context, error) {
@@ -49,21 +49,21 @@ func NewContextFromClients(
 	}
 
 	return &Context{
-		NetworkID:    networkID,
-		BlockchainID: blockchainID,
-		AVAXAssetID:  avaxAsset.AssetID,
+		NetworkID:     networkID,
+		BlockchainID:  blockchainID,
+		VOLREXAssetID: avaxAsset.AssetID,
 	}, nil
 }
 
 func newSnowContext(c *Context) (*snow.Context, error) {
 	lookup := ids.NewAliaser()
 	return &snow.Context{
-		NetworkID:   c.NetworkID,
-		SubnetID:    constants.PrimaryNetworkID,
-		ChainID:     c.BlockchainID,
-		CChainID:    c.BlockchainID,
-		AVAXAssetID: c.AVAXAssetID,
-		Log:         logging.NoLog{},
-		BCLookup:    lookup,
+		NetworkID:     c.NetworkID,
+		SubnetID:      constants.PrimaryNetworkID,
+		ChainID:       c.BlockchainID,
+		CChainID:      c.BlockchainID,
+		VOLREXAssetID: c.VOLREXAssetID,
+		Log:           logging.NoLog{},
+		BCLookup:      lookup,
 	}, lookup.Alias(c.BlockchainID, Alias)
 }

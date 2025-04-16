@@ -86,12 +86,12 @@ var _ = e2e.DescribeXChainSerial("[Virtuous Transfer Tx AVAX]", func() {
 			require.NoError(err)
 			testKeys = append(testKeys, newKeys...)
 
-			const transferPerRound = units.MilliAvax
+			const transferPerRound = units.MilliVolrex
 
 			tc.By("Funding new keys")
 			fundingWallet := e2e.NewWallet(tc, env.NewKeychain(), env.GetRandomNodeURI())
 			fundingOutputs := make([]*avax.TransferableOutput, len(newKeys))
-			fundingAssetID := fundingWallet.X().Builder().Context().AVAXAssetID
+			fundingAssetID := fundingWallet.X().Builder().Context().VOLREXAssetID
 			for i, key := range newKeys {
 				fundingOutputs[i] = &avax.TransferableOutput{
 					Asset: avax.Asset{
@@ -133,7 +133,7 @@ var _ = e2e.DescribeXChainSerial("[Virtuous Transfer Tx AVAX]", func() {
 				xWallet := baseWallet.X()
 				xBuilder := xWallet.Builder()
 				xContext := xBuilder.Context()
-				avaxAssetID := xContext.AVAXAssetID
+				volrexAssetID := xContext.VOLREXAssetID
 
 				wallets := make([]*primary.Wallet, len(testKeys))
 				shortAddrs := make([]ids.ShortID, len(testKeys))
@@ -168,7 +168,7 @@ var _ = e2e.DescribeXChainSerial("[Virtuous Transfer Tx AVAX]", func() {
 					balances, err := w.X().Builder().GetFTBalance()
 					require.NoError(err)
 
-					bal := balances[avaxAssetID]
+					bal := balances[volrexAssetID]
 					testBalances = append(testBalances, bal)
 
 					tc.Log().Info("balance in AVAX",
@@ -208,7 +208,7 @@ var _ = e2e.DescribeXChainSerial("[Virtuous Transfer Tx AVAX]", func() {
 					_, err := wallets[fromIdx].X().IssueBaseTx(
 						[]*avax.TransferableOutput{{
 							Asset: avax.Asset{
-								ID: avaxAssetID,
+								ID: volrexAssetID,
 							},
 							Out: &secp256k1fx.TransferOutput{
 								Amt: senderOrigBal + 1,
@@ -236,7 +236,7 @@ var _ = e2e.DescribeXChainSerial("[Virtuous Transfer Tx AVAX]", func() {
 				tx, err := wallets[fromIdx].X().IssueBaseTx(
 					[]*avax.TransferableOutput{{
 						Asset: avax.Asset{
-							ID: avaxAssetID,
+							ID: volrexAssetID,
 						},
 						Out: &secp256k1fx.TransferOutput{
 							Amt: amountToTransfer,
@@ -252,14 +252,14 @@ var _ = e2e.DescribeXChainSerial("[Virtuous Transfer Tx AVAX]", func() {
 
 				balances, err := wallets[fromIdx].X().Builder().GetFTBalance()
 				require.NoError(err)
-				senderCurBalX := balances[avaxAssetID]
+				senderCurBalX := balances[volrexAssetID]
 				tc.Log().Info("first wallet balance",
 					zap.Uint64("balance", senderCurBalX),
 				)
 
 				balances, err = wallets[toIdx].X().Builder().GetFTBalance()
 				require.NoError(err)
-				receiverCurBalX := balances[avaxAssetID]
+				receiverCurBalX := balances[volrexAssetID]
 				tc.Log().Info("second wallet balance",
 					zap.Uint64("balance", receiverCurBalX),
 				)

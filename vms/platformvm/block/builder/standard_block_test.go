@@ -43,9 +43,9 @@ func TestAtomicTxImports(t *testing.T) {
 			TxID:        ids.GenerateTestID(),
 			OutputIndex: 1,
 		},
-		Asset: avax.Asset{ID: env.ctx.AVAXAssetID},
+		Asset: avax.Asset{ID: env.ctx.VOLREXAssetID},
 		Out: &secp256k1fx.TransferOutput{
-			Amt:          70 * units.MicroAvax,
+			Amt:          70 * units.MicroVolrex,
 			OutputOwners: *owner,
 		},
 	}

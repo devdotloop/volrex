@@ -16,17 +16,17 @@ func ExampleNewCalculator() {
 		week            = 7 * day
 		stakingDuration = 4 * week
 
-		stakeAmount = 100_000 * units.Avax // 100k AVAX
+		stakeAmount = 100_000 * units.Volrex // 100k AVAX
 
 		// The current supply can be fetched with the platform.getCurrentSupply API
-		currentSupply = 447_903_489_576_595_361 * units.NanoAvax // ~448m AVAX
+		currentSupply = 447_903_489_576_595_361 * units.NanoVolrex // ~448m AVAX
 	)
 	var (
 		mainnetRewardConfig = Config{
 			MaxConsumptionRate: .12 * PercentDenominator,
 			MinConsumptionRate: .10 * PercentDenominator,
 			MintingPeriod:      365 * 24 * time.Hour,
-			SupplyCap:          720 * units.MegaAvax,
+			SupplyCap:          720 * units.MegaVolrex,
 		}
 		mainnetCalculator = NewCalculator(mainnetRewardConfig)
 	)

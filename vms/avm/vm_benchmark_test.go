@@ -31,7 +31,7 @@ func getAllUTXOsBenchmark(b *testing.B, utxoCount int, randSrc rand.Source) {
 				TxID:        ids.GenerateTestID(),
 				OutputIndex: uint32(randSrc.Int63()),
 			},
-			Asset: avax.Asset{ID: env.vm.ctx.AVAXAssetID},
+			Asset: avax.Asset{ID: env.vm.ctx.VOLREXAssetID},
 			Out: &secp256k1fx.TransferOutput{
 				Amt: 100000,
 				OutputOwners: secp256k1fx.OutputOwners{

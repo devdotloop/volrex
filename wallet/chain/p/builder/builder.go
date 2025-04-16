@@ -431,10 +431,10 @@ func (b *builder) NewAddValidatorTx(
 	shares uint32,
 	options ...common.Option,
 ) (*txs.AddValidatorTx, error) {
-	avaxAssetID := b.context.AVAXAssetID
+	volrexAssetID := b.context.VOLREXAssetID
 	toBurn := map[ids.ID]uint64{}
 	toStake := map[ids.ID]uint64{
-		avaxAssetID: vdr.Wght,
+		volrexAssetID: vdr.Wght,
 	}
 	ops := common.NewOptions(options)
 	inputs, baseOutputs, stakeOutputs, err := b.spend(
@@ -583,10 +583,10 @@ func (b *builder) NewAddDelegatorTx(
 	rewardsOwner *secp256k1fx.OutputOwners,
 	options ...common.Option,
 ) (*txs.AddDelegatorTx, error) {
-	avaxAssetID := b.context.AVAXAssetID
+	volrexAssetID := b.context.VOLREXAssetID
 	toBurn := map[ids.ID]uint64{}
 	toStake := map[ids.ID]uint64{
-		avaxAssetID: vdr.Wght,
+		volrexAssetID: vdr.Wght,
 	}
 	ops := common.NewOptions(options)
 	inputs, baseOutputs, stakeOutputs, err := b.spend(
@@ -828,7 +828,7 @@ func (b *builder) NewConvertSubnetToL1Tx(
 
 	var (
 		toBurn = map[ids.ID]uint64{
-			b.context.AVAXAssetID: avaxToBurn,
+			b.context.VOLREXAssetID: avaxToBurn,
 		}
 		toStake = map[ids.ID]uint64{}
 		ops     = common.NewOptions(options)
@@ -901,7 +901,7 @@ func (b *builder) NewRegisterL1ValidatorTx(
 ) (*txs.RegisterL1ValidatorTx, error) {
 	var (
 		toBurn = map[ids.ID]uint64{
-			b.context.AVAXAssetID: balance,
+			b.context.VOLREXAssetID: balance,
 		}
 		toStake = map[ids.ID]uint64{}
 
@@ -1007,7 +1007,7 @@ func (b *builder) NewIncreaseL1ValidatorBalanceTx(
 ) (*txs.IncreaseL1ValidatorBalanceTx, error) {
 	var (
 		toBurn = map[ids.ID]uint64{
-			b.context.AVAXAssetID: balance,
+			b.context.VOLREXAssetID: balance,
 		}
 		toStake        = map[ids.ID]uint64{}
 		ops            = common.NewOptions(options)
@@ -1120,7 +1120,7 @@ func (b *builder) NewImportTx(
 	var (
 		addrs           = ops.Addresses(b.addrs)
 		minIssuanceTime = ops.MinIssuanceTime()
-		avaxAssetID     = b.context.AVAXAssetID
+		volrexAssetID   = b.context.VOLREXAssetID
 
 		importedInputs  = make([]*avax.TransferableInput, 0, len(utxos))
 		importedAmounts = make(map[ids.ID]uint64)
@@ -1167,7 +1167,7 @@ func (b *builder) NewImportTx(
 
 	outputs := make([]*avax.TransferableOutput, 0, len(importedAmounts))
 	for assetID, amount := range importedAmounts {
-		if assetID == avaxAssetID {
+		if assetID == volrexAssetID {
 			continue
 		}
 
@@ -1205,7 +1205,7 @@ func (b *builder) NewImportTx(
 		toBurn  = map[ids.ID]uint64{}
 		toStake = map[ids.ID]uint64{}
 	)
-	excessAVAX := importedAmounts[avaxAssetID]
+	excessAVAX := importedAmounts[volrexAssetID]
 
 	inputs, changeOutputs, _, err := b.spend(
 		toBurn,
@@ -1699,8 +1699,8 @@ func (b *builder) spend(
 	}
 
 	// AVAX is handled last to account for fees.
-	utxosByAVAXAssetID := splitByAssetID(utxosByLocktime.unlocked, b.context.AVAXAssetID)
-	for _, utxo := range utxosByAVAXAssetID.other {
+	utxosByVOLREXAssetID := splitByAssetID(utxosByLocktime.unlocked, b.context.VOLREXAssetID)
+	for _, utxo := range utxosByVOLREXAssetID.other {
 		assetID := utxo.AssetID()
 		if !s.shouldConsumeAsset(assetID) {
 			continue
@@ -1749,7 +1749,7 @@ func (b *builder) spend(
 		}
 	}
 
-	for _, utxo := range utxosByAVAXAssetID.requested {
+	for _, utxo := range utxosByVOLREXAssetID.requested {
 		requiredFee, err := s.calculateFee()
 		if err != nil {
 			return nil, nil, nil, err
@@ -1758,7 +1758,7 @@ func (b *builder) spend(
 		// If we don't need to burn or stake additional AVAX and we have
 		// consumed enough AVAX to pay the required fee, we should stop
 		// consuming UTXOs.
-		if !s.shouldConsumeAsset(b.context.AVAXAssetID) && excessAVAX >= requiredFee {
+		if !s.shouldConsumeAsset(b.context.VOLREXAssetID) && excessAVAX >= requiredFee {
 			break
 		}
 
@@ -1787,7 +1787,7 @@ func (b *builder) spend(
 			return nil, nil, nil, err
 		}
 
-		excess := s.consumeAsset(b.context.AVAXAssetID, out.Amt)
+		excess := s.consumeAsset(b.context.VOLREXAssetID, out.Amt)
 		excessAVAX, err = math.Add(excessAVAX, excess)
 		if err != nil {
 			return nil, nil, nil, err
@@ -1811,7 +1811,7 @@ func (b *builder) spend(
 			"%w: provided UTXOs needed %d more nAVAX (%q)",
 			ErrInsufficientFunds,
 			requiredFee-excessAVAX,
-			b.context.AVAXAssetID,
+			b.context.VOLREXAssetID,
 		)
 	}
 
@@ -1821,7 +1821,7 @@ func (b *builder) spend(
 	}
 	excessAVAXOutput := &avax.TransferableOutput{
 		Asset: avax.Asset{
-			ID: b.context.AVAXAssetID,
+			ID: b.context.VOLREXAssetID,
 		},
 		Out: secpExcessAVAXOutput,
 	}
@@ -1872,7 +1872,7 @@ func (b *builder) authorize(ownerID ids.ID, options *common.Options) (*secp256k1
 }
 
 func (b *builder) initCtx(tx txs.UnsignedTx) error {
-	ctx, err := NewSnowContext(b.context.NetworkID, b.context.AVAXAssetID)
+	ctx, err := NewSnowContext(b.context.NetworkID, b.context.VOLREXAssetID)
 	if err != nil {
 		return err
 	}

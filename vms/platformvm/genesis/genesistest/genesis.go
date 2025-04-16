@@ -25,16 +25,16 @@ import (
 
 const (
 	DefaultValidatorDuration = 28 * 24 * time.Hour
-	DefaultValidatorWeight   = 5 * units.MilliAvax
-	DefaultInitialBalance    = 1 * units.Avax
+	DefaultValidatorWeight   = 5 * units.MilliVolrex
+	DefaultInitialBalance    = 1 * units.Volrex
 
 	ValidatorDelegationShares = reward.PercentDenominator
 	XChainName                = "x"
-	InitialSupply             = 360 * units.MegaAvax
+	InitialSupply             = 360 * units.MegaVolrex
 )
 
 var (
-	AVAXAsset = avax.Asset{ID: snowtest.AVAXAssetID}
+	AVAXAsset = avax.Asset{ID: snowtest.VOLREXAssetID}
 
 	DefaultValidatorStartTime     = upgrade.InitiallyActiveTime
 	DefaultValidatorStartTimeUnix = uint64(DefaultValidatorStartTime.Unix())
@@ -102,7 +102,7 @@ func New(t testing.TB, c Config) *platformvmgenesis.Genesis {
 	for i, key := range c.FundedKeys {
 		genesis.UTXOs[i] = &platformvmgenesis.UTXO{UTXO: avax.UTXO{
 			UTXOID: avax.UTXOID{
-				TxID:        snowtest.AVAXAssetID,
+				TxID:        snowtest.VOLREXAssetID,
 				OutputIndex: uint32(i),
 			},
 			Asset: AVAXAsset,

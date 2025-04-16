@@ -38,9 +38,9 @@ type Context struct {
 	PublicKey       *bls.PublicKey
 	NetworkUpgrades upgrade.Config
 
-	XChainID    ids.ID
-	CChainID    ids.ID
-	AVAXAssetID ids.ID
+	XChainID      ids.ID
+	CChainID      ids.ID
+	VOLREXAssetID ids.ID
 
 	Log logging.Logger
 	// Deprecated: This lock should not be used unless absolutely necessary.

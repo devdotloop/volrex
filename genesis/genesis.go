@@ -330,7 +330,7 @@ func FromConfig(config *Config) ([]byte, ids.ID, error) {
 	if err != nil {
 		return nil, ids.Empty, fmt.Errorf("couldn't parse avm genesis reply: %w", err)
 	}
-	avaxAssetID, err := AVAXAssetID(bytes)
+	volrexAssetID, err := VOLREXAssetID(bytes)
 	if err != nil {
 		return nil, ids.Empty, fmt.Errorf("couldn't generate AVAX asset ID: %w", err)
 	}
@@ -346,7 +346,7 @@ func FromConfig(config *Config) ([]byte, ids.ID, error) {
 
 	// Specify the initial state of the Platform Chain
 	platformvmArgs := api.BuildGenesisArgs{
-		AvaxAssetID:   avaxAssetID,
+		VolrexAssetID: volrexAssetID,
 		NetworkID:     json.Uint32(config.NetworkID),
 		Time:          json.Uint64(config.StartTime),
 		InitialSupply: json.Uint64(initialSupply),
@@ -471,7 +471,7 @@ func FromConfig(config *Config) ([]byte, ids.ID, error) {
 		return nil, ids.Empty, fmt.Errorf("problem parsing platformvm genesis bytes: %w", err)
 	}
 
-	return genesisBytes, avaxAssetID, nil
+	return genesisBytes, volrexAssetID, nil
 }
 
 func splitAllocations(allocations []Allocation, numSplits int) [][]Allocation {
@@ -550,7 +550,7 @@ func VMGenesis(genesisBytes []byte, vmID ids.ID) (*pchaintxs.Tx, error) {
 	return nil, fmt.Errorf("couldn't find blockchain with VM ID %s", vmID)
 }
 
-func AVAXAssetID(avmGenesisBytes []byte) (ids.ID, error) {
+func VOLREXAssetID(avmGenesisBytes []byte) (ids.ID, error) {
 	parser, err := xchaintxs.NewParser(
 		[]fxs.Fx{
 			&secp256k1fx.Fx{},
