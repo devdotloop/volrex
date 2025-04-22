@@ -63,13 +63,13 @@ func validateInitialStakedFunds(config *Config) error {
 	initialStakedFundsSet := set.Set[ids.ShortID]{}
 	for _, allocation := range config.Allocations {
 		// It is ok to have duplicates as different
-		// ethAddrs could claim to the same avaxAddr.
-		allocationSet.Add(allocation.AVAXAddr)
+		// ethAddrs could claim to the same volrexAddr.
+		allocationSet.Add(allocation.VOLREXAddr)
 	}
 
 	for _, staker := range config.InitialStakedFunds {
 		if initialStakedFundsSet.Contains(staker) {
-			avaxAddr, err := address.Format(
+			volrexAddr, err := address.Format(
 				configChainIDAlias,
 				constants.GetHRP(config.NetworkID),
 				staker.Bytes(),
@@ -84,13 +84,13 @@ func validateInitialStakedFunds(config *Config) error {
 			return fmt.Errorf(
 				"%w: %s",
 				errDuplicateInitiallyStakedAddress,
-				avaxAddr,
+				volrexAddr,
 			)
 		}
 		initialStakedFundsSet.Add(staker)
 
 		if !allocationSet.Contains(staker) {
-			avaxAddr, err := address.Format(
+			volrexAddr, err := address.Format(
 				configChainIDAlias,
 				constants.GetHRP(config.NetworkID),
 				staker.Bytes(),
@@ -105,7 +105,7 @@ func validateInitialStakedFunds(config *Config) error {
 			return fmt.Errorf(
 				"%w in address %s",
 				errNoAllocationToStake,
-				avaxAddr,
+				volrexAddr,
 			)
 		}
 	}
@@ -202,22 +202,25 @@ func validateConfig(networkID uint32, config *Config, stakingCfg *StakingConfig)
 //  2. The asset ID of AVAX
 func FromFile(networkID uint32, filepath string, stakingCfg *StakingConfig) ([]byte, ids.ID, error) {
 	switch networkID {
-	case constants.MainnetID, constants.TestnetID, constants.LocalID:
+	case constants.TestnetID, constants.LocalID:
 		return nil, ids.Empty, fmt.Errorf(
 			"%w: %s",
 			errOverridesStandardNetworkConfig,
 			constants.NetworkName(networkID),
 		)
 	}
+	fmt.Printf("start GetConfigFile")
 
 	config, err := GetConfigFile(filepath)
 	if err != nil {
 		return nil, ids.Empty, fmt.Errorf("unable to load provided genesis config at %s: %w", filepath, err)
 	}
+	fmt.Printf("start validateConfig")
 
 	if err := validateConfig(networkID, config, stakingCfg); err != nil {
 		return nil, ids.Empty, fmt.Errorf("genesis config validation failed: %w", err)
 	}
+	fmt.Printf("start FromConfig")
 
 	return FromConfig(config)
 }
@@ -244,7 +247,7 @@ func FromFile(networkID uint32, filepath string, stakingCfg *StakingConfig) ([]b
 //  2. The asset ID of AVAX
 func FromFlag(networkID uint32, genesisContent string, stakingCfg *StakingConfig) ([]byte, ids.ID, error) {
 	switch networkID {
-	case constants.MainnetID, constants.TestnetID, constants.LocalID:
+	case constants.TestnetID, constants.LocalID:
 		return nil, ids.Empty, fmt.Errorf(
 			"%w: %s",
 			errOverridesStandardNetworkConfig,
@@ -281,8 +284,8 @@ func FromConfig(config *Config) ([]byte, ids.ID, error) {
 	}
 	{
 		avax := avm.AssetDefinition{
-			Name:         "Avalanche",
-			Symbol:       "AVAX",
+			Name:         "Volrex",
+			Symbol:       "VOLREX",
 			Denomination: 9,
 			InitialState: map[string][]interface{}{},
 		}
@@ -296,7 +299,7 @@ func FromConfig(config *Config) ([]byte, ids.ID, error) {
 		utils.Sort(xAllocations)
 
 		for _, allocation := range xAllocations {
-			addr, err := address.FormatBech32(hrp, allocation.AVAXAddr.Bytes())
+			addr, err := address.FormatBech32(hrp, allocation.VOLREXAddr.Bytes())
 			if err != nil {
 				return nil, ids.Empty, err
 			}
@@ -315,7 +318,7 @@ func FromConfig(config *Config) ([]byte, ids.ID, error) {
 			return nil, ids.Empty, fmt.Errorf("couldn't parse memo bytes to string: %w", err)
 		}
 		avmArgs.GenesisData = map[string]avm.AssetDefinition{
-			"AVAX": avax, // The AVM starts out with one asset: AVAX
+			"VOLREX": avax, // The AVM starts out with one asset: AVAX
 		}
 	}
 	avmReply := avm.BuildGenesisReply{}
@@ -354,11 +357,11 @@ func FromConfig(config *Config) ([]byte, ids.ID, error) {
 		Encoding:      defaultEncoding,
 	}
 	for _, allocation := range config.Allocations {
-		if initiallyStaked.Contains(allocation.AVAXAddr) {
+		if initiallyStaked.Contains(allocation.VOLREXAddr) {
 			skippedAllocations = append(skippedAllocations, allocation)
 			continue
 		}
-		addr, err := address.FormatBech32(hrp, allocation.AVAXAddr.Bytes())
+		addr, err := address.FormatBech32(hrp, allocation.VOLREXAddr.Bytes())
 		if err != nil {
 			return nil, ids.Empty, err
 		}
@@ -396,7 +399,7 @@ func FromConfig(config *Config) ([]byte, ids.ID, error) {
 
 		utxos := []api.UTXO(nil)
 		for _, allocation := range nodeAllocations {
-			addr, err := address.FormatBech32(hrp, allocation.AVAXAddr.Bytes())
+			addr, err := address.FormatBech32(hrp, allocation.VOLREXAddr.Bytes())
 			if err != nil {
 				return nil, ids.Empty, err
 			}

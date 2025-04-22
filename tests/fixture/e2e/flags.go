@@ -121,7 +121,7 @@ func RegisterFlags() *FlagVars {
 	flag.StringVar(
 		&vars.pluginDir,
 		"plugin-dir",
-		tmpnet.GetEnvWithDefault(tmpnet.AvalancheGoPluginDirEnvName, os.ExpandEnv("$HOME/.avalanchego/plugins")),
+		tmpnet.GetEnvWithDefault(tmpnet.AvalancheGoPluginDirEnvName, os.ExpandEnv("$HOME/.volrex/plugins")),
 		fmt.Sprintf(
 			"[optional] the dir containing VM plugins. Also possible to configure via the %s env variable.",
 			tmpnet.AvalancheGoPluginDirEnvName,

@@ -120,7 +120,7 @@ func main() {
 	startNetworkCmd.PersistentFlags().StringVar(
 		&pluginDir,
 		"plugin-dir",
-		tmpnet.GetEnvWithDefault(tmpnet.AvalancheGoPluginDirEnvName, os.ExpandEnv("$HOME/.avalanchego/plugins")),
+		tmpnet.GetEnvWithDefault(tmpnet.AvalancheGoPluginDirEnvName, os.ExpandEnv("$HOME/.volrex/plugins")),
 		"[optional] the dir containing VM plugins",
 	)
 	startNetworkCmd.PersistentFlags().Uint8Var(&nodeCount, "node-count", tmpnet.DefaultNodeCount, "Number of nodes the network should initially consist of")

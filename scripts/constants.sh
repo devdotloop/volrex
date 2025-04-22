@@ -11,7 +11,7 @@ set -euo pipefail
 AVALANCHE_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )"; cd .. && pwd ) # Directory above this script
 
 # Where AvalancheGo binary goes
-avalanchego_path="$AVALANCHE_PATH/build/avalanchego"
+avalanchego_path="$AVALANCHE_PATH/build/volrex"
 
 # Static compilation
 static_ld_flags=''

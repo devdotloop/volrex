@@ -38,7 +38,7 @@ func TestAllocationCompare(t *testing.T) {
 			name:   "bytes smaller",
 			alloc1: Allocation{},
 			alloc2: Allocation{
-				AVAXAddr: ids.ShortID{1},
+				VOLREXAddr: ids.ShortID{1},
 			},
 			expected: -1,
 		},

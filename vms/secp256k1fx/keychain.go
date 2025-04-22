@@ -51,13 +51,13 @@ func NewKeychain(keys ...*secp256k1.PrivateKey) *Keychain {
 // Add a new key to the key chain
 func (kc *Keychain) Add(key *secp256k1.PrivateKey) {
 	pk := key.PublicKey()
-	avaxAddr := pk.Address()
-	if _, ok := kc.avaxAddrToKeyIndex[avaxAddr]; !ok {
-		kc.avaxAddrToKeyIndex[avaxAddr] = len(kc.Keys)
+	volrexAddr := pk.Address()
+	if _, ok := kc.avaxAddrToKeyIndex[volrexAddr]; !ok {
+		kc.avaxAddrToKeyIndex[volrexAddr] = len(kc.Keys)
 		ethAddr := pk.EthAddress()
 		kc.ethAddrToKeyIndex[ethAddr] = len(kc.Keys)
 		kc.Keys = append(kc.Keys, key)
-		kc.Addrs.Add(avaxAddr)
+		kc.Addrs.Add(volrexAddr)
 		kc.EthAddrs.Add(ethAddr)
 	}
 }

@@ -93,7 +93,7 @@ func NewTestGenesis(
 		Allocations: []genesis.UnparsedAllocation{
 			{
 				ETHAddr:       ethAddress,
-				AVAXAddr:      stakeAddress,
+				VOLREXAddr:    stakeAddress,
 				InitialAmount: 0,
 				UnlockSchedule: []genesis.LockedAmount{ // Provides stake to validators
 					{
@@ -123,7 +123,7 @@ func NewTestGenesis(
 
 	// Set X-Chain balances
 	for xChainAddress, balance := range xChainBalances {
-		avaxAddr, err := address.Format("X", constants.GetHRP(networkID), xChainAddress[:])
+		volrexAddr, err := address.Format("X", constants.GetHRP(networkID), xChainAddress[:])
 		if err != nil {
 			return nil, fmt.Errorf("failed to format X-Chain address: %w", err)
 		}
@@ -131,7 +131,7 @@ func NewTestGenesis(
 			config.Allocations,
 			genesis.UnparsedAllocation{
 				ETHAddr:       ethAddress,
-				AVAXAddr:      avaxAddr,
+				VOLREXAddr:    volrexAddr,
 				InitialAmount: balance,
 				UnlockSchedule: []genesis.LockedAmount{
 					{

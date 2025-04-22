@@ -195,6 +195,7 @@ func bech32ToID(addrStr string) (ids.ShortID, error) {
 
 // BuildGenesis build the genesis state of the Platform Chain (and thereby the Avalanche network.)
 func (*StaticService) BuildGenesis(_ *http.Request, args *BuildGenesisArgs, reply *BuildGenesisReply) error {
+	fmt.Printf("🚀 BuildGenesisArgs: %+v\n", args.Validators)
 	// Specify the UTXOs on the Platform chain that exist at genesis.
 	utxos := make([]*genesis.UTXO, 0, len(args.UTXOs))
 	for i, apiUTXO := range args.UTXOs {
@@ -240,6 +241,7 @@ func (*StaticService) BuildGenesis(_ *http.Request, args *BuildGenesisArgs, repl
 	// Specify the validators that are validating the primary network at genesis.
 	vdrs := txheap.NewByEndTime()
 	for _, vdr := range args.Validators {
+		fmt.Printf("🚀 BuildGenesisValidator: %+v\n", vdr)
 		weight := uint64(0)
 		stake := make([]*avax.TransferableOutput, len(vdr.Staked))
 		utils.Sort(vdr.Staked)

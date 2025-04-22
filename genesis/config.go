@@ -37,7 +37,7 @@ type LockedAmount struct {
 
 type Allocation struct {
 	ETHAddr        ids.ShortID    `json:"ethAddr"`
-	AVAXAddr       ids.ShortID    `json:"avaxAddr"`
+	VOLREXAddr     ids.ShortID    `json:"volrexAddr"`
 	InitialAmount  uint64         `json:"initialAmount"`
 	UnlockSchedule []LockedAmount `json:"unlockSchedule"`
 }
@@ -48,12 +48,12 @@ func (a Allocation) Unparse(networkID uint32) (UnparsedAllocation, error) {
 		UnlockSchedule: a.UnlockSchedule,
 		ETHAddr:        "0x" + hex.EncodeToString(a.ETHAddr.Bytes()),
 	}
-	avaxAddr, err := address.Format(
+	volrexAddr, err := address.Format(
 		"X",
 		constants.GetHRP(networkID),
-		a.AVAXAddr.Bytes(),
+		a.VOLREXAddr.Bytes(),
 	)
-	ua.AVAXAddr = avaxAddr
+	ua.VOLREXAddr = volrexAddr
 	return ua, err
 }
 
@@ -61,7 +61,7 @@ func (a Allocation) Compare(other Allocation) int {
 	if amountCmp := cmp.Compare(a.InitialAmount, other.InitialAmount); amountCmp != 0 {
 		return amountCmp
 	}
-	return a.AVAXAddr.Compare(other.AVAXAddr)
+	return a.VOLREXAddr.Compare(other.VOLREXAddr)
 }
 
 type Staker struct {
@@ -72,14 +72,16 @@ type Staker struct {
 }
 
 func (s Staker) Unparse(networkID uint32) (UnparsedStaker, error) {
-	avaxAddr, err := address.Format(
+	fmt.Printf("Staker 0: %s\n", s.NodeID.String())
+	volrexAddr, err := address.Format(
 		"X",
 		constants.GetHRP(networkID),
 		s.RewardAddress.Bytes(),
 	)
+	fmt.Printf("Staker 1: %s\n", volrexAddr, err)
 	return UnparsedStaker{
 		NodeID:        s.NodeID,
-		RewardAddress: avaxAddr,
+		RewardAddress: volrexAddr,
 		DelegationFee: s.DelegationFee,
 		Signer:        s.Signer,
 	}, err
@@ -122,7 +124,7 @@ func (c Config) Unparse() (UnparsedConfig, error) {
 		uc.Allocations[i] = ua
 	}
 	for i, isa := range c.InitialStakedFunds {
-		avaxAddr, err := address.Format(
+		volrexAddr, err := address.Format(
 			"X",
 			constants.GetHRP(uc.NetworkID),
 			isa.Bytes(),
@@ -130,7 +132,7 @@ func (c Config) Unparse() (UnparsedConfig, error) {
 		if err != nil {
 			return uc, err
 		}
-		uc.InitialStakedFunds[i] = avaxAddr
+		uc.InitialStakedFunds[i] = volrexAddr
 	}
 	for i, is := range c.InitialStakers {
 		uis, err := is.Unparse(c.NetworkID)
@@ -252,6 +254,39 @@ func GetConfigContent(genesisContent string) (*Config, error) {
 	}
 	return parseGenesisJSONBytesToConfig(bytes)
 }
+
+// func parseGenesisJSONBytesToConfig(bytes []byte) (*Config, error) {
+// 	fmt.Println("🔍 [Debug] Starting to parse genesis JSON")
+
+// 	// 1. Preview raw JSON input
+// 	snippet := string(bytes)
+// 	if len(snippet) > 800 {
+// 		snippet = snippet[:800]
+// 	}
+// 	fmt.Println("📄 [Input Preview]:", snippet)
+
+// 	// 2. Attempt to unmarshal into UnparsedConfig
+// 	var unparsedConfig UnparsedConfig
+// 	err := json.Unmarshal(bytes, &unparsedConfig)
+// 	if err != nil {
+// 		fmt.Println("❌ [Error] JSON Unmarshal failed")
+// 		fmt.Println("🔎 JSON Error:", err)
+// 		return nil, fmt.Errorf("%w: %w", errInvalidGenesisJSON, err)
+// 	}
+
+// 	fmt.Println("✅ [Success] JSON unmarshalled. Proceeding to Parse()...")
+
+// 	// 3. Attempt to parse the unparsed config
+// 	config, err := unparsedConfig.Parse()
+// 	if err != nil {
+// 		fmt.Println("❌ [Error] Parse() failed")
+// 		fmt.Println("🔎 Parse Error:", err)
+// 		return nil, fmt.Errorf("unable to parse config: %w", err)
+// 	}
+
+// 	fmt.Println("🎉 [Done] Genesis config parsed successfully")
+// 	return &config, nil
+// }
 
 func parseGenesisJSONBytesToConfig(bytes []byte) (*Config, error) {
 	var unparsedConfig UnparsedConfig

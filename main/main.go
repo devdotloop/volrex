@@ -18,6 +18,8 @@ import (
 )
 
 func main() {
+	// fmt.Printf("Reached XYZ: zain")
+
 	fs := config.BuildFlagSet()
 	v, err := config.BuildViper(fs, os.Args[1:])
 

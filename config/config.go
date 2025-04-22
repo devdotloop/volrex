@@ -829,6 +829,7 @@ func getUpgradeConfig(v *viper.Viper, networkID uint32) (upgrade.Config, error) 
 }
 
 func getGenesisData(v *viper.Viper, networkID uint32, stakingCfg *genesis.StakingConfig) ([]byte, ids.ID, error) {
+	fmt.Printf("Loading genesis for %s...\n", constants.NetworkName(networkID))
 	// try first loading genesis content directly from flag/env-var
 	if v.IsSet(GenesisFileContentKey) {
 		genesisData := v.GetString(GenesisFileContentKey)
@@ -841,6 +842,7 @@ func getGenesisData(v *viper.Viper, networkID uint32, stakingCfg *genesis.Stakin
 		return genesis.FromFile(networkID, genesisFileName, stakingCfg)
 	}
 
+	fmt.Printf("Loading genesis from config for %s...\n", constants.NetworkName(networkID))
 	// finally if file is not specified/readable go for the predefined config
 	config := genesis.GetConfig(networkID)
 	return genesis.FromConfig(config)

@@ -22,7 +22,8 @@ import (
 	nodeconfig "github.com/ava-labs/avalanchego/config/node"
 )
 
-const Header = `     _____               .__                       .__
+const Header = `
+ 		 _____               .__                       .__
     /  _  \___  _______  |  | _____    ____   ____ |  |__   ____    ,_ o
    /  /_\  \  \/ /\__  \ |  | \__  \  /    \_/ ___\|  |  \_/ __ \   / //\,
   /    |    \   /  / __ \|  |__/ __ \|   |  \  \___|   Y  \  ___/    \>> |

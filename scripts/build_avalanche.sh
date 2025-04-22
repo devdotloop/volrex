@@ -3,9 +3,9 @@
 set -euo pipefail
 
 print_usage() {
-  printf "Usage: build_avalanche [OPTIONS]
+  printf "Usage: build_volrex [OPTIONS]
 
-  Build avalanchego
+  Build volrex
 
   Options:
 
@@ -22,12 +22,12 @@ while getopts 'r' flag; do
   esac
 done
 
-# Avalanchego root folder
+# Volrex root folder
 AVALANCHE_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )"; cd .. && pwd )
 # Load the constants
 source "$AVALANCHE_PATH"/scripts/constants.sh
 source "$AVALANCHE_PATH"/scripts/git_commit.sh
 
 build_args="$race"
-echo "Building AvalancheGo..."
+echo "Building Volrex..."
 go build $build_args -ldflags "-X github.com/ava-labs/avalanchego/version.GitCommit=$git_commit $static_ld_flags" -o "$avalanchego_path" "$AVALANCHE_PATH/main/"*.go

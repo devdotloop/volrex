@@ -4,6 +4,12 @@
 
 awscpu
 
+.vscode/
+
+build/
+
+test/
+
 # Binaries for programs and plugins
 *.exe
 *.exe~

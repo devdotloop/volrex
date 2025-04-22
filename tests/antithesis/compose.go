@@ -184,7 +184,7 @@ func newComposeProject(network *tmpnet.Network, nodeImageName string, workloadIm
 			{
 				Type:   types.VolumeTypeBind,
 				Source: fmt.Sprintf("./volumes/%s/logs", serviceName),
-				Target: "/root/.avalanchego/logs",
+				Target: "/root/.volrex/logs",
 			},
 		}
 
@@ -199,7 +199,7 @@ func newComposeProject(network *tmpnet.Network, nodeImageName string, workloadIm
 				volumes = append(volumes, types.ServiceVolumeConfig{
 					Type:   types.VolumeTypeBind,
 					Source: fmt.Sprintf("./volumes/%s/db", serviceName),
-					Target: "/root/.avalanchego/db",
+					Target: "/root/.volrex/db",
 				})
 			}
 		}
