@@ -1,8 +1,24 @@
 {
   "mainnet": [
     {
-      "id": "NodeID-A6onFGyJjA37EZ7kYHANMR1PFRT8NmXrF",
-      "ip": "54.232.137.111:9651"
+      "id": "NodeID-LVS9qQhb5Cc1yaxPRPnQgLShZSsWyguYQ",
+      "ip": "165.22.100.134:9651"
+    },
+    {
+      "id": "NodeID-7rB6xFFUPYTFm7gb3mXkEDBf2NBVQb8fn",
+      "ip": "152.42.168.60:9651"
+    },
+    {
+      "id": "NodeID-3s4bQ28NrMsCgpCar67qRmGyj8G9kS2qd",
+      "ip": "159.223.87.238:9651"
+    },
+    {
+      "id": "NodeID-7Rwj79XkJmA83EUYtt5dmmDZf4ze29eQq",
+      "ip": "143.198.221.190:9651"
+    },
+    {
+      "id": "NodeID-2zJqmxk72SeD7ss1xekn4jyvRDxboyvoC",
+      "ip": "159.65.14.166:9651"
     }
   ]
 }
