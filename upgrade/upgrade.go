@@ -21,7 +21,7 @@ var (
 		ApricotPhase2Time:            time.Date(2021, time.May, 10, 11, 0, 0, 0, time.UTC),
 		ApricotPhase3Time:            time.Date(2021, time.August, 24, 14, 0, 0, 0, time.UTC),
 		ApricotPhase4Time:            time.Date(2021, time.September, 22, 21, 0, 0, 0, time.UTC),
-		ApricotPhase4MinPChainHeight: 793005,
+		ApricotPhase4MinPChainHeight: 0,
 		ApricotPhase5Time:            time.Date(2021, time.December, 2, 18, 0, 0, 0, time.UTC),
 		ApricotPhasePre6Time:         time.Date(2022, time.September, 5, 1, 30, 0, 0, time.UTC),
 		ApricotPhase6Time:            time.Date(2022, time.September, 6, 20, 0, 0, 0, time.UTC),
