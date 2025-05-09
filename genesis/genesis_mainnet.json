@@ -4,61 +4,62 @@
     {
       "ethAddr": "0xd138dd1a5DAcda592F5C502cda22b8fA4dc17C5D",
       "volrexAddr": "X-volrex1rajk8kay6va3nkyvczrgdwcyduur5j0nnn604v",
-      "initialAmount": 250000000000,
+      "initialAmount": 2000000000000,
       "unlockSchedule": [
         {
-          "amount": 360000000000,
-          "locktime": 1607472000
+          "amount": 19998000000000000,
+          "locktime": 1767225600
         }
       ]
     },
     {
       "ethAddr": "0x16e44B292edE4211c7EFE353aA984cf5bEb0Db4c",
       "volrexAddr": "X-volrex1gsunywdsgydz5ndnpjfpt7gkza4hfulvluduyc",
-      "initialAmount": 250000000000,
+      "initialAmount": 2000000000000,
       "unlockSchedule": [
         {
-          "amount": 360000000000,
-          "locktime": 1607472000
+          "amount": 19998000000000000,
+          "locktime": 1767225600
         }
       ]
     },
     {
       "ethAddr": "0xaE09feEB8AA0e83CA59FbcE57129185f5308B2f9",
       "volrexAddr": "X-volrex1f0kedelfrwerlyvlp0v24s9kjkvfgakeh2saj5",
-      "initialAmount": 250000000000,
+      "initialAmount": 2000000000000,
       "unlockSchedule": [
         {
-          "amount": 360000000000,
-          "locktime": 1607472000
+          "amount": 19998000000000000,
+          "locktime": 1767225600
         }
       ]
     },
     {
       "ethAddr": "0xe065fd0536bdc602354869A9A99Ad46e27b21a4f",
       "volrexAddr": "X-volrex1uvypvng7zjww22jw9kremrl2u8cyvly8r2gkek",
-      "initialAmount": 250000000000,
+      "initialAmount": 2000000000000,
       "unlockSchedule": [
         {
-          "amount": 360000000000,
-          "locktime": 1607472000
+          "amount": 19998000000000000,
+          "locktime": 1767225600
         }
       ]
     },
     {
       "ethAddr": "0xCF570c752d7b820f38903A1d94b5987d71289afb",
       "volrexAddr": "X-volrex1q60av32dgxwa3d2w39q5q8l3zaldusz5ks00p8",
-      "initialAmount": 250000000000,
+      "initialAmount": 2000000000000,
       "unlockSchedule": [
         {
-          "amount": 360000000000,
-          "locktime": 1607472000
+          "amount": 19998000000000000,
+          "locktime": 1767225600
         }
       ]
     }
   ],
-  "startTime": 1599696000,
-  "initialStakeDuration": 7776000,
+  "startTime": 1746830400,
+  "endTime": 1778366400,
+  "initialStakeDuration": 31536000,
   "initialStakeDurationOffset": 5400,
   "initialStakedFunds": [
     "X-volrex1rajk8kay6va3nkyvczrgdwcyduur5j0nnn604v",
