@@ -1,0 +1,120 @@
+{
+  "networkID": 1337,
+  "allocations": [
+    {
+      "ethAddr": "0xd138dd1a5DAcda592F5C502cda22b8fA4dc17C5D",
+      "volrexAddr": "X-volrex1rajk8kay6va3nkyvczrgdwcyduur5j0nnn604v",
+      "initialAmount": 2000000000000,
+      "unlockSchedule": [
+        {
+          "amount": 19998000000000000,
+          "locktime": 1767225600
+        }
+      ]
+    },
+    {
+      "ethAddr": "0x16e44B292edE4211c7EFE353aA984cf5bEb0Db4c",
+      "volrexAddr": "X-volrex1gsunywdsgydz5ndnpjfpt7gkza4hfulvluduyc",
+      "initialAmount": 2000000000000,
+      "unlockSchedule": [
+        {
+          "amount": 19998000000000000,
+          "locktime": 1767225600
+        }
+      ]
+    },
+    {
+      "ethAddr": "0xaE09feEB8AA0e83CA59FbcE57129185f5308B2f9",
+      "volrexAddr": "X-volrex1f0kedelfrwerlyvlp0v24s9kjkvfgakeh2saj5",
+      "initialAmount": 2000000000000,
+      "unlockSchedule": [
+        {
+          "amount": 19998000000000000,
+          "locktime": 1767225600
+        }
+      ]
+    },
+    {
+      "ethAddr": "0xe065fd0536bdc602354869A9A99Ad46e27b21a4f",
+      "volrexAddr": "X-volrex1uvypvng7zjww22jw9kremrl2u8cyvly8r2gkek",
+      "initialAmount": 2000000000000,
+      "unlockSchedule": [
+        {
+          "amount": 19998000000000000,
+          "locktime": 1767225600
+        }
+      ]
+    },
+    {
+      "ethAddr": "0xCF570c752d7b820f38903A1d94b5987d71289afb",
+      "volrexAddr": "X-volrex1q60av32dgxwa3d2w39q5q8l3zaldusz5ks00p8",
+      "initialAmount": 2000000000000,
+      "unlockSchedule": [
+        {
+          "amount": 19998000000000000,
+          "locktime": 1767225600
+        }
+      ]
+    }
+  ],
+  "startTime": 1746830400,
+  "endTime": 1778366400,
+  "initialStakeDuration": 31536000,
+  "initialStakeDurationOffset": 5400,
+  "initialStakedFunds": [
+    "X-volrex1rajk8kay6va3nkyvczrgdwcyduur5j0nnn604v",
+    "X-volrex1gsunywdsgydz5ndnpjfpt7gkza4hfulvluduyc",
+    "X-volrex1f0kedelfrwerlyvlp0v24s9kjkvfgakeh2saj5",
+    "X-volrex1uvypvng7zjww22jw9kremrl2u8cyvly8r2gkek",
+    "X-volrex1q60av32dgxwa3d2w39q5q8l3zaldusz5ks00p8"
+  ],
+  "initialStakers": [
+    {
+      "nodeID": "NodeID-LVS9qQhb5Cc1yaxPRPnQgLShZSsWyguYQ",
+      "rewardAddress": "X-volrex1rajk8kay6va3nkyvczrgdwcyduur5j0nnn604v",
+      "delegationFee": 200000,
+      "signer": {
+        "publicKey": "0x85e7e8a4e80109fc2a71ad345ef7cc4cf548b67c2d13453c1d26e61178b62f48bf4332b49a01843de26de76cf517a2f0",
+        "proofOfPossession": "0x8768d144d0c0e738bff159a4e5612c953b6d1eb52127803a1057eeb10913df6dbc4bd739f63c2b02e393e61d583fd78e168fb69ad4d96858f5d909576df11acfddd11baa52d60808f28136d1221aedd879a33ef6ee8bb63d2bf2ddd6fdfebc63"
+      }
+    },
+    {
+      "nodeID": "NodeID-7rB6xFFUPYTFm7gb3mXkEDBf2NBVQb8fn",
+      "rewardAddress": "X-volrex1gsunywdsgydz5ndnpjfpt7gkza4hfulvluduyc",
+      "delegationFee": 200000,
+      "signer": {
+        "publicKey": "0xa085102b175d5b0d0dd375c663bb23e1a6d8867e93dfd432f52576f97c582c5604c7afee41e5bd0377576d17cd194673",
+        "proofOfPossession": "0xa9e1dc61561669f90255adb5e2b29a593219e96aaa31c53d16039b09806d4b32ae4e13d57e14ab1f41614fcb3b2d3bc718c35024d588084b51a43a2702a1577584aaae0de4c4fb74ec731522bf634c3b2af4e315565c7e7d385975c370c07a8a"
+      }
+    },
+    {
+      "nodeID": "NodeID-3s4bQ28NrMsCgpCar67qRmGyj8G9kS2qd",
+      "rewardAddress": "X-volrex1f0kedelfrwerlyvlp0v24s9kjkvfgakeh2saj5",
+      "delegationFee": 200000,
+      "signer": {
+        "publicKey": "0xa61fb6a7ddd52c8f31659f77fa684afbd7202b0845b8cefda9bc3dc330c52bf11fb5d928ca83d5d01a10731d54b785c7",
+        "proofOfPossession": "0xa1bd6d8ba2d814923ef12d0c77d6f7ac35b85cceaf8f7b73d73938ad2ea3decb13990b00ff17fd1983bff7e1515d521210735ed4d80e1f88618c5f22b3e2066e9c529badde555d4b5e2fd38ec0c52d3645fd069230377e2457a954be4d69cc40"
+      }
+    },
+    {
+      "nodeID": "NodeID-7Rwj79XkJmA83EUYtt5dmmDZf4ze29eQq",
+      "rewardAddress": "X-volrex1uvypvng7zjww22jw9kremrl2u8cyvly8r2gkek",
+      "delegationFee": 200000,
+      "signer": {
+        "publicKey": "0xa0a5487678fae631c777aaa3e9e03d8b87cfd3f5f42402065ce7cd22dad4fd41ba4b15ce412f5726fbcb577eb0414d43",
+        "proofOfPossession": "0x86cf6027fa9d8f111a48b61f01bf2fd7781f78e8b22530a76fb7728ecb9e0381568ff50aa138eb3091f7c0fda6461b0d10cfdea3e9d5501cb26877a8ef75b7ec6c8cd6879bb31650c47d6b64e5f0a433778b5e61292266c6d6a3295d2e3f3357"
+      }
+    },
+    {
+      "nodeID": "NodeID-2zJqmxk72SeD7ss1xekn4jyvRDxboyvoC",
+      "rewardAddress": "X-volrex1q60av32dgxwa3d2w39q5q8l3zaldusz5ks00p8",
+      "delegationFee": 200000,
+      "signer": {
+        "publicKey": "0xa9bb559876826e986f86de971bc82690634a39de3c8e2a60b82fafb31452ea4d32e46b0dbc7e30145cb6384ca6576890",
+        "proofOfPossession": "0x81e7266ab86d6c0759708ca33f86c9ba039a5638d44ea3a8c32ec0503db1a1be61add87151a1ef3d630b5ddb70b02f40075e5c6a2468b5fc002f2e1446ea89bac844c6b819cfb4dbb429bac71fa02afc7c3356d7ce95e9e8bb1259464af61a21"
+      }
+    }
+  ],
+  "cChainGenesis": "{\"config\":{\"chainId\":1337,\"homesteadBlock\":0,\"daoForkBlock\":0,\"daoForkSupport\":true,\"eip150Block\":0,\"eip150Hash\":\"0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0\",\"eip155Block\":0,\"eip158Block\":0,\"byzantiumBlock\":0,\"constantinopleBlock\":0,\"petersburgBlock\":0,\"istanbulBlock\":0,\"muirGlacierBlock\":0,\"berlinBlock\":0,\"londonBlock\":0,\"shanghaiTime\":0},\"nonce\":\"0x0\",\"timestamp\":\"0x0\",\"extraData\":\"0x00\",\"gasLimit\":\"0x5f5e100\",\"difficulty\":\"0x0\",\"mixHash\":\"0x0000000000000000000000000000000000000000000000000000000000000000\",\"coinbase\":\"0x0000000000000000000000000000000000000000\",\"alloc\":{\"0100000000000000000000000000000000000000\":{\"code\":\"0x7300000000000000000000000000000000000000003014608060405260043610603d5760003560e01c80631e010439146042578063b6510bb314606e575b600080fd5b605c60048036036020811015605657600080fd5b503560b1565b60408051918252519081900360200190f35b818015607957600080fd5b5060af60048036036080811015608e57600080fd5b506001600160a01b03813516906020810135906040810135906060013560b6565b005b30cd90565b836001600160a01b031681836108fc8690811502906040516000604051808303818888878c8acf9550505050505015801560f4573d6000803e3d6000fd5b505050505056fea26469706673582212201eebce970fe3f5cb96bf8ac6ba5f5c133fc2908ae3dcd51082cfee8f583429d064736f6c634300060a0033\",\"balance\":\"0x0\"}},\"number\":\"0x0\",\"gasUsed\":\"0x0\",\"parentHash\":\"0x0000000000000000000000000000000000000000000000000000000000000000\"}",
+  "message": "From Snowflake to Volrex. Per consensum ad astra."
+}

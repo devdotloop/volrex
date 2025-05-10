@@ -15,7 +15,7 @@ import (
 
 // Const variables to be exported
 const (
-	MainnetID uint32 = 1
+	MainnetID uint32 = 1337
 	CascadeID uint32 = 2
 	DenaliID  uint32 = 3
 	EverestID uint32 = 4
