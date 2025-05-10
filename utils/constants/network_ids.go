@@ -15,7 +15,7 @@ import (
 
 // Const variables to be exported
 const (
-	MainnetID uint32 = 1337
+	MainnetID uint32 = 1
 	CascadeID uint32 = 2
 	DenaliID  uint32 = 3
 	EverestID uint32 = 4
@@ -41,7 +41,7 @@ const (
 	FujiHRP     = "fuji"
 	UnitTestHRP = "testing"
 	LocalHRP    = "local"
-	FallbackHRP = "custom"
+	FallbackHRP = "volrex"
 )
 
 // Variables to be exported
